@@ -1,0 +1,7 @@
+.ticketTitle {
+    cursor: pointer;
+}
+
+.ticketTitle:hover {
+    opacity: 0.85;
+}
