@@ -1,15 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { ticketsI } from "../components/Tickets/tickets.model"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { Ticket } from "../components/Tickets/tickets.model"
 
 
-const initialTicketState: ticketsI[] = []
+const initialTicketState: Ticket[] = []
 
 const ticketsSlice = createSlice({
     name: 'tickets',
     initialState: initialTicketState,
     reducers: {
-        add(state, action){
+        add(state, action: PayloadAction<Ticket>){
             state.push(action.payload)
+        },
+        addMultiple(state, action: PayloadAction<Ticket[]>){
+            const tickets = action.payload
+            tickets.forEach(ticket => {
+                state.push(ticket)
+            })
+        },
+        setTickets(state, action: PayloadAction<Ticket[]>){
+            return action.payload
         }
     }
 })

@@ -1,8 +1,11 @@
 import { FunctionComponent, useState } from 'react'
 
+import { signInUser, signUpUserWithUsername } from '../../lib/firebase.service'
+
 const AuthForm: FunctionComponent = () => {
 	const [isLogin, setIsLogin] = useState(true)
 	const [formInputs, setFormInputs] = useState({
+		username: '',
 		email: '',
 		password: '',
 		repeatPassword: '',
@@ -19,19 +22,54 @@ const AuthForm: FunctionComponent = () => {
 		setFormInputs((prevInputs) => ({ ...prevInputs, [inputName]: newInput }))
 	}
 
-	function onSubmitForm(event: React.FormEvent) {
+	async function onSubmitForm(event: React.FormEvent) {
 		event.preventDefault()
-		console.log(formInputs)
+
+		const { username, email, password, repeatPassword } = formInputs
+
+		if (isLogin) {
+			const response = await signInUser(email, password)
+			if (!response) {
+				//todo gerer errors (same for signup)
+			} else {
+				resetForm()
+			}
+		} else {
+			signUpUserWithUsername(email, password, username)
+			resetForm()
+		}
 	}
 
-    function onSwitchAuthtype(){
-        setIsLogin(prevType => !prevType)
-    }
+	function onSwitchAuthtype() {
+		setIsLogin((prevType) => !prevType)
+		resetForm()
+	}
+
+	function resetForm() {
+		setFormInputs({
+			username: '',
+			email: '',
+			password: '',
+			repeatPassword: '',
+		})
+	}
 
 	return (
 		<>
 			<h3>{isLogin ? 'Login' : 'Signup'}</h3>
 			<form>
+				{!isLogin && (
+					<>
+						<label htmlFor="username">Username</label>
+						<input
+							name="username"
+							id="username"
+							onChange={(event) => onInputChange(event, 'username')}
+							value={formInputs.username}
+						/>
+					</>
+				)}
+
 				<label htmlFor="email">Email</label>
 				<input
 					type="email"
@@ -45,17 +83,25 @@ const AuthForm: FunctionComponent = () => {
 				<input
 					name="password"
 					id="password"
+					type="password"
 					onChange={(event) => onInputChange(event, 'password')}
 					value={formInputs.password}
 				/>
 
-				<label htmlFor="repeat-password">Repeat Password</label>
-				<input
-					name="repeat-password"
-					id="repeat-password"
-					onChange={(event) => onInputChange(event, 'repeatPassword')}
-					value={formInputs.repeatPassword}
-				/>
+				{!isLogin && (
+					<>
+						<label htmlFor="repeat-password">Repeat Password</label>
+						<input
+							name="repeat-password"
+							id="repeat-password"
+							type="password"
+							onChange={(event) =>
+								onInputChange(event, 'repeatPassword')
+							}
+							value={formInputs.repeatPassword}
+						/>
+					</>
+				)}
 
 				<button type="submit" onClick={onSubmitForm}>
 					Submit

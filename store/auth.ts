@@ -1,17 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+interface AuthState {
+	username: null | string
+	id: null | string
+}
 
-const initialAuthState = false
+const initialAuthState: AuthState = {username: null, id: null}
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState: initialAuthState,
 	reducers: {
-		login(state) {
-			return true
+		login(state, action: PayloadAction<AuthState>) {
+			console.log('payload from auth : ', action.payload)
+			return action.payload
 		},
 		logout(state) {
-			return false
+			return initialAuthState
 		},
 	},
 })

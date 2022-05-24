@@ -34,20 +34,19 @@ const MONTH_NAMES = [
   
   
   // --- Main function
-  export function getTimeAgo(dateParam: any) {
+  export function getTimeAgo(dateParam: Date) {
     if (!dateParam) {
       return null;
     }
   
-    const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
     const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
     const today = new Date();
     const yesterday = new Date(today.getTime() - DAY_IN_MS);
-    const seconds = Math.round((today.getTime() - date.getTime()) / 1000);
+    const seconds = Math.round((today.getTime() - dateParam.getTime()) / 1000);
     const minutes = Math.round(seconds / 60);
-    const isToday = today.toDateString() === date.toDateString();
-    const isYesterday = yesterday.toDateString() === date.toDateString();
-    const isThisYear = today.getFullYear() === date.getFullYear();
+    const isToday = today.toDateString() === dateParam.toDateString();
+    const isYesterday = yesterday.toDateString() === dateParam.toDateString();
+    const isThisYear = today.getFullYear() === dateParam.getFullYear();
   
   
     if (seconds < 5) {
@@ -59,12 +58,12 @@ const MONTH_NAMES = [
     } else if (minutes < 60) {
       return `${ minutes } minutes ago`;
     } else if (isToday) {
-      return getFormattedDate(date, 'Today'); // Today at 10:20
+      return getFormattedDate(dateParam, 'Today'); // Today at 10:20
     } else if (isYesterday) {
-      return getFormattedDate(date, 'Yesterday'); // Yesterday at 10:20
+      return getFormattedDate(dateParam, 'Yesterday'); // Yesterday at 10:20
     } else if (isThisYear) {
-      return getFormattedDate(date, '', true); // 10. January at 10:20
+      return getFormattedDate(dateParam, '', true); // 10. January at 10:20
     }
   
-    return getFormattedDate(date); // 10. January 2017. at 10:20
+    return getFormattedDate(dateParam); // 10. January 2017. at 10:20
   }

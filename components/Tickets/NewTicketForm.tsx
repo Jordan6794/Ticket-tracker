@@ -1,9 +1,10 @@
 import { FunctionComponent, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
+import { useAppDispatch } from '../../hooks'
+
 import { ticketsActions } from '../../store/tickets'
-import { ticketsI, Priority, Status } from './tickets.model'
+import { Ticket, Priority, Status } from './tickets.model'
 
 const NewTicketForm: FunctionComponent = () => {
 	const [formInputs, setFormInputs] = useState({
@@ -11,7 +12,7 @@ const NewTicketForm: FunctionComponent = () => {
 		post: '',
 	})
 
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 
 	function onInputChange(
 		event:
@@ -28,7 +29,7 @@ const NewTicketForm: FunctionComponent = () => {
 		event.preventDefault()
 
 		const currentDate = new Date().toString()
-		const newTicket: ticketsI = {
+		const newTicket: Ticket = {
 			title: formInputs.title,
 			author: 'me',
 			message: formInputs.post,

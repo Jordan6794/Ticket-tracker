@@ -1,4 +1,4 @@
-export interface ticketsI {
+export interface Ticket {
 	title: string
     author: string
     message: string
