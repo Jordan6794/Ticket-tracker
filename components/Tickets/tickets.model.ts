@@ -1,10 +1,25 @@
+import { Timestamp } from "firebase/firestore/lite"
+
 export interface Ticket {
 	title: string
     author: string
     message: string
     id: string
-	dateCreated: string
-	priority: Priority
+	created_at: number 
+	last_updated_date: number
+	priority: Priority 
+	status: Status
+    answers: Array<Answer>
+}
+
+export interface TicketRAW {
+	title: string
+    author: string
+    message: string
+    id: string
+	created_at: Timestamp 
+	last_updated_date: Timestamp 
+	priority: Priority 
 	status: Status
     answers: Array<Answer>
 }

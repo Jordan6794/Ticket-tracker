@@ -9,12 +9,13 @@ const ticketsSlice = createSlice({
     initialState: initialTicketState,
     reducers: {
         add(state, action: PayloadAction<Ticket>){
-            state.push(action.payload)
+            // unshift rather than push so they get display on top of the page when maping through the array
+            state.unshift(action.payload)
         },
         addMultiple(state, action: PayloadAction<Ticket[]>){
             const tickets = action.payload
             tickets.forEach(ticket => {
-                state.push(ticket)
+                state.unshift(ticket)
             })
         },
         setTickets(state, action: PayloadAction<Ticket[]>){

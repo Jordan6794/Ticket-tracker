@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { auth, logout } from '../../lib/firebase.service'
+import { QUERY_CREATED_AT, QUERY_ORDER_BY } from '../../shared/consts'
 import { authActions } from '../../store/auth'
 
 import styles from './Nav.module.css'
@@ -33,7 +34,7 @@ export default function Nav() {
 		<div className={styles.nav}>
 			<ul className={styles.linkList}>
 				<li>
-					<Link href="/tickets/feed">Tickets</Link>
+					<Link href={`/tickets/feed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>Tickets</Link>
 				</li>
 				<li>
 					<Link href="/">Home page</Link>

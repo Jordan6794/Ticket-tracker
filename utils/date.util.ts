@@ -20,12 +20,12 @@ const MONTH_NAMES = [
     if (prefomattedDate) {
         // Today at 10:20
         // Yesterday at 10:20
-        return `${ prefomattedDate } at ${ hours }:${ minutes }`;
+        return `${ prefomattedDate } at ${ hours }:${ minutesDisplay }`;
       }
     
       if (hideYear) {
         // 10. January at 10:20
-        return `${ day }. ${ month } at ${ hours }:${ minutes }`;
+        return `${ day }. ${ month } at ${ hours }:${ minutesDisplay }`;
       }
   
     // 10. January 2017. at 10:20

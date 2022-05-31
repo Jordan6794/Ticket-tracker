@@ -1,17 +1,17 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, WithFieldValue } from "firebase/firestore/lite";
-import { Ticket } from "../components/Tickets/tickets.model";
+import { TicketRAW } from "../components/Tickets/tickets.model";
 
 
 
-export const ticketConverter: FirestoreDataConverter<Ticket> = {
-    toFirestore(ticket: WithFieldValue<Ticket>): DocumentData{
+export const ticketConverter: FirestoreDataConverter<TicketRAW> = {
+    toFirestore(ticket: WithFieldValue<TicketRAW>): DocumentData{
         return ticket
     },
 
-    fromFirestore(snapshot: QueryDocumentSnapshot): Ticket{
+    fromFirestore(snapshot: QueryDocumentSnapshot): TicketRAW{
         //? le ! est quoi exactement btw ? même que pour les input = promet que pas undefined ?
         const data = snapshot.data()!
-		return data as Ticket
+		return data as TicketRAW
     }
 }
 

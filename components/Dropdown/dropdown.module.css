@@ -1,0 +1,38 @@
+.togglerDiv{
+    position: relative;
+    width: 100px;
+}
+
+.togglerBtn {
+    width: 100%;
+}
+
+.dropdown{
+    position: absolute;
+    top: 100%;
+    left: -10%;
+    border-radius: 10px;
+    background-color: white;
+    width: 150px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid lightgray;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    text-align: center;
+    padding: 0 0.5em;
+    padding-top: 0.5em
+}
+
+.item:last-child {
+    padding-bottom: 0.5em
+}
+
+.item:hover{
+    background-color: rgba(0,0,0,0.1);
+}

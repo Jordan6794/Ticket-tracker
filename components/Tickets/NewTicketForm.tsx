@@ -1,10 +1,12 @@
+import { Timestamp } from 'firebase/firestore/lite'
 import { FunctionComponent, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { useAppDispatch } from '../../hooks'
-
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { postTicket } from '../../lib/firebase.service'
 import { ticketsActions } from '../../store/tickets'
-import { Ticket, Priority, Status } from './tickets.model'
+import { serializeTicket } from '../../utils/serialize.util'
+import { Ticket, Priority, Status, TicketRAW } from './tickets.model'
 
 const NewTicketForm: FunctionComponent = () => {
 	const [formInputs, setFormInputs] = useState({
@@ -12,6 +14,7 @@ const NewTicketForm: FunctionComponent = () => {
 		post: '',
 	})
 
+	const user = useAppSelector((state) => state.auth)
 	const dispatch = useAppDispatch()
 
 	function onInputChange(
@@ -28,18 +31,24 @@ const NewTicketForm: FunctionComponent = () => {
 	function onSubmitForm(event: React.FormEvent) {
 		event.preventDefault()
 
-		const currentDate = new Date().toString()
-		const newTicket: Ticket = {
+		const currentDate = Timestamp.now()
+		const newTicket: TicketRAW = {
 			title: formInputs.title,
-			author: 'me',
+			author: user.username || 'anonymous',
 			message: formInputs.post,
 			id: uuidv4(),
-			dateCreated: currentDate,
+			created_at: currentDate,
+			last_updated_date: currentDate,
 			priority: Priority.Low,
 			status: Status.Open,
 			answers: [],
 		}
-		dispatch(ticketsActions.add(newTicket))
+
+		postTicket(newTicket)
+		//todo need to put un if que la post req success
+
+		const serializedTicket = serializeTicket(newTicket)
+		dispatch(ticketsActions.add(serializedTicket))
 
 		resetForm()
 	}

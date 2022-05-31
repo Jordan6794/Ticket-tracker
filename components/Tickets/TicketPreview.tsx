@@ -8,11 +8,11 @@ import styles from './TicketPreview.module.css'
 
 const TicketPreview: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => {
 
-	const formatedDate = getTimeAgo(new Date(ticket.dateCreated))
+	const formatedDate = getTimeAgo(new Date(ticket.created_at * 1000))
 
 	return (
 		<div className='ticket-div'>
-			<h3 className={styles.ticketTitle}><Link href={`/tickets/${ticket.id}`}>{ticket.title}</Link></h3>
+			<Link href={`/tickets/${ticket.id}`}><a className={styles.ticketTitle}>{ticket.title}</a></Link>
 			<p>message : {ticket.message}</p>
             <p>Created by {ticket.author} {formatedDate}</p>
 			<p>Status {ticket.status} priority {ticket.priority}</p>

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { FunctionComponent, useState } from 'react'
 
 import { signInUser, signUpUserWithUsername } from '../../lib/firebase.service'
@@ -10,6 +11,8 @@ const AuthForm: FunctionComponent = () => {
 		password: '',
 		repeatPassword: '',
 	})
+
+	const router = useRouter()
 
 	function onInputChange(
 		event:
@@ -33,6 +36,7 @@ const AuthForm: FunctionComponent = () => {
 				//todo gerer errors (same for signup)
 			} else {
 				resetForm()
+				router.push('/tickets/feed?orderBy=created_at')
 			}
 		} else {
 			signUpUserWithUsername(email, password, username)

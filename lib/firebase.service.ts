@@ -7,8 +7,18 @@ import {
 	signOut,
 	updateProfile,
 } from 'firebase/auth'
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite'
+import {
+	getFirestore,
+	collection,
+	getDocs,
+	setDoc,
+	doc,
+	query,
+	orderBy,
+} from 'firebase/firestore/lite'
 import { ticketConverter } from '../shared/firestore-converters'
+import { TicketRAW } from '../components/Tickets/tickets.model'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,12 +40,49 @@ const db = getFirestore(app)
 const auth = getAuth(app)
 // const analytics = getAnalytics(app);
 
+const ticketsCollec = collection(db, 'tickets').withConverter(
+	ticketConverter
+)
+
 //? name fromDatabase redondant ici ou good ?
 export async function getTicketsFromDatabase() {
-	const ticketsCollec = collection(db, 'tickets').withConverter(ticketConverter)
+	
 	const querySnapshot = await getDocs(ticketsCollec)
 	const result = querySnapshot.docs.map((doc) => doc.data())
 	return result
+}
+
+//? obv way better to have one funct with query param ? Mais chiant parce que component less dumb knowing the query ?
+export async function getTicketsOrderedByQuery(orderedBy: string) {
+	const q = query(ticketsCollec, orderBy(orderedBy, 'desc'))
+	const querySnapshot = await getDocs(q)
+	const result = querySnapshot.docs.map((doc) => doc.data())
+	return result
+}
+export async function getTicketsOrderByLastUpdated() {
+	const q = query(ticketsCollec, orderBy('last_updated_date', 'desc'))
+	const querySnapshot = await getDocs(q)
+	const result = querySnapshot.docs.map((doc) => doc.data())
+	return result
+}
+export async function getTicketsOrderByStatus() {
+	const q = query(ticketsCollec, orderBy('last_updated_date', 'desc'))
+	const querySnapshot = await getDocs(q)
+	const result = querySnapshot.docs.map((doc) => doc.data())
+	return result
+}
+export async function getTicketsOrderByPriority() {
+	const q = query(ticketsCollec, orderBy('last_updated_date', 'desc'))
+	const querySnapshot = await getDocs(q)
+	const result = querySnapshot.docs.map((doc) => doc.data())
+	return result
+}
+
+export async function postTicket(ticket: TicketRAW) {
+	const ticketsCollec = collection(db, 'tickets').withConverter(
+		ticketConverter
+	)
+	await setDoc(doc(ticketsCollec, ticket.id), ticket)
 }
 
 //? comment gerer le return quand fail en returnant une falsy value + error info (pour manage l'UX en fonction de l'error) ?
@@ -91,4 +138,4 @@ export async function logout() {
 	}
 }
 
-export {auth}
+export { auth }

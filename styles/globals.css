@@ -1,3 +1,7 @@
+:root{
+  --text-color: #dadce1;
+}
+
 html,
 body {
   padding: 0;
