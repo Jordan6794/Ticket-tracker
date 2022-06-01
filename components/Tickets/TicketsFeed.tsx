@@ -1,48 +1,48 @@
 import { useRouter } from "next/router";
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getTicketsFromDatabase, getTicketsOrderedByQuery } from "../../lib/firebase.service";
+import { getTicketsFromDatabase } from "../../lib/firebase.service";
 
 import { ticketsActions } from "../../store/tickets";
 import { serializeTicket } from "../../utils/serialize.util";
+import { sortTickets } from "../../utils/sortTickets.util";
 import Filter from "./Filter/Filter";
 
 import NewTicketForm from "./NewTicketForm";
 import TicketPreview from "./TicketPreview";
+import { Ticket } from "./tickets.model";
 
 import styles from './TicketsFeed.module.css'
 
 
 const TicketsFeed: FunctionComponent = () => {
+    const [sortedTickets, setSortedTickets] = useState<Ticket[]>([])
+    const tickets = useAppSelector(state => state.tickets)
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-
-    //? est-ce que je refetch en utilisant le sort de firebase ou better de fetch once et order myself ?
     //? router.isReady ? Un peu yologuessing ici mais should be totally good
     useEffect(() => {
-        const fetchTickets = async () => {
-            if(router.isReady){
-                if(router.query.orderBy && !Array.isArray(router.query.orderBy)){
-                    const tickets = await getTicketsOrderedByQuery(router.query.orderBy)
-                    const serializedTickets = tickets.map(ticket => serializeTicket(ticket))
-                    dispatch(ticketsActions.setTickets(serializedTickets))
-                }
-                else {
-                    const tickets = await getTicketsFromDatabase()
-                    const serializedTickets = tickets.map(ticket => serializeTicket(ticket))
-                    dispatch(ticketsActions.setTickets(serializedTickets))
-                }
+        const fetchTickets2 = async() => {
+                const tickets = await getTicketsFromDatabase()
+                const serializedTickets = tickets.map(ticket => serializeTicket(ticket))
+                dispatch(ticketsActions.setTickets(serializedTickets))
+        }
+        fetchTickets2()
+    }, [dispatch])
+
+    useEffect(() => {
+        if(router.isReady && tickets.length > 0){
+            if(router.query.orderBy && !Array.isArray(router.query.orderBy)){
+                setSortedTickets(sortTickets(tickets, router.query.orderBy))
+            } else {
+                setSortedTickets(tickets)
             }
         }
-        fetchTickets()
-    }, [dispatch, router.query.orderBy, router.isReady])
+    },[tickets, router.query.orderBy, router.isReady])
 
-    
-    const tickets = useAppSelector(state => state.tickets)
-
-    const ticketsDisplay = tickets.map(ticketItem => <TicketPreview key={ticketItem.id} ticket={ticketItem} />)
+    const ticketsDisplay = sortedTickets.map(ticketItem => <TicketPreview key={ticketItem.id} ticket={ticketItem} />)
 
     return(
         <div className={styles.feedDiv}>

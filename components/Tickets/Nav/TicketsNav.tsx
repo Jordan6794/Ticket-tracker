@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { FunctionComponent } from 'react'
 
-import { QUERY_CREATED_AT, QUERY_ORDER_BY } from '../../shared/consts'
+import { QUERY_CREATED_AT, QUERY_ORDER_BY } from '../../../utils/consts'
 
 import styles from './TicketsNav.module.css'
 

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { QUERY_CREATED_AT, QUERY_LAST_UPDATED, QUERY_PRIORITY, QUERY_STATUS } from '../../shared/consts'
+import { QUERY_CREATED_AT, QUERY_LAST_UPDATED, QUERY_PRIORITY, QUERY_STATUS } from '../../utils/consts'
 
 import styles from './dropdown.module.css'
 import DropdownItem from './dropdownItem'

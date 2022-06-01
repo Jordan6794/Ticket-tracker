@@ -29,6 +29,10 @@
     padding-top: 0.5em
 }
 
+.active {
+    color: red
+}
+
 .item:last-child {
     padding-bottom: 0.5em
 }

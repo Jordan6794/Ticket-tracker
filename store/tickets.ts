@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Ticket } from "../components/Tickets/tickets.model"
+import { Ticket, Answer } from "../components/Tickets/tickets.model"
 
 
 const initialTicketState: Ticket[] = []
@@ -20,6 +20,9 @@ const ticketsSlice = createSlice({
         },
         setTickets(state, action: PayloadAction<Ticket[]>){
             return action.payload
+        },
+        addReply(state, action: PayloadAction<Answer>){
+            
         }
     }
 })

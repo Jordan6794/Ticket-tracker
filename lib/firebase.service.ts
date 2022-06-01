@@ -15,9 +15,11 @@ import {
 	doc,
 	query,
 	orderBy,
+	getDoc,
 } from 'firebase/firestore/lite'
-import { ticketConverter } from '../shared/firestore-converters'
+
 import { TicketRAW } from '../components/Tickets/tickets.model'
+import { ticketConverter } from '../utils/firestore-converters'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -45,37 +47,19 @@ const ticketsCollec = collection(db, 'tickets').withConverter(
 )
 
 //? name fromDatabase redondant ici ou good ?
-export async function getTicketsFromDatabase() {
-	
+export async function getTicketsFromDatabase() {	
 	const querySnapshot = await getDocs(ticketsCollec)
 	const result = querySnapshot.docs.map((doc) => doc.data())
 	return result
 }
 
-//? obv way better to have one funct with query param ? Mais chiant parce que component less dumb knowing the query ?
-export async function getTicketsOrderedByQuery(orderedBy: string) {
-	const q = query(ticketsCollec, orderBy(orderedBy, 'desc'))
-	const querySnapshot = await getDocs(q)
-	const result = querySnapshot.docs.map((doc) => doc.data())
-	return result
-}
-export async function getTicketsOrderByLastUpdated() {
-	const q = query(ticketsCollec, orderBy('last_updated_date', 'desc'))
-	const querySnapshot = await getDocs(q)
-	const result = querySnapshot.docs.map((doc) => doc.data())
-	return result
-}
-export async function getTicketsOrderByStatus() {
-	const q = query(ticketsCollec, orderBy('last_updated_date', 'desc'))
-	const querySnapshot = await getDocs(q)
-	const result = querySnapshot.docs.map((doc) => doc.data())
-	return result
-}
-export async function getTicketsOrderByPriority() {
-	const q = query(ticketsCollec, orderBy('last_updated_date', 'desc'))
-	const querySnapshot = await getDocs(q)
-	const result = querySnapshot.docs.map((doc) => doc.data())
-	return result
+export async function getTicket(id: string){
+	const docSnap = await getDoc(doc(ticketsCollec, id))
+	if(docSnap.exists()){
+		return docSnap.data()
+	} else {
+		return null
+	}
 }
 
 export async function postTicket(ticket: TicketRAW) {

@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react'
 
-import { useAppDispatch } from '../../hooks'
-import { displaySortBy } from '../../shared/utils'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 import { sortByActions } from '../../store/sortBy'
+import { displaySortBy } from '../../utils/sortDisplay'
 import styles from './dropdown.module.css'
 
 const DropdownItem: FunctionComponent<{ sort: string }> = ({ sort }) => {
+	const currentSort = useAppSelector(state => state.sortBy)
 	const dispatch = useAppDispatch()
 	function handleClick() {
 		dispatch(sortByActions.set(sort))
@@ -13,8 +14,10 @@ const DropdownItem: FunctionComponent<{ sort: string }> = ({ sort }) => {
 
 	const sortDisplay = displaySortBy(sort)
 
+	const activeClass = (currentSort === sort ) ? styles.active : ''
+
 	return (
-		<a className={styles.item} onClick={handleClick}>
+		<a className={`${styles.item} ${activeClass}`} onClick={handleClick}>
 			<span>{sortDisplay}</span>
 		</a>
 	)

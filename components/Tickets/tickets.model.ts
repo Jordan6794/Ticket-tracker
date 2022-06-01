@@ -38,8 +38,8 @@ export enum Status {
 	Closed = 'Closed',
 }
 
-interface Answer {
+export interface Answer {
     author: string
-    date: string
+    date: number
     post: string
 }

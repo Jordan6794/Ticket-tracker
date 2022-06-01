@@ -1,9 +1,9 @@
 import { useRouter } from "next/router"
 import { FunctionComponent, useEffect, useState } from "react"
-import { isArray } from "util"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { displaySortBy } from "../../shared/utils"
+
 import { sortByActions } from "../../store/sortBy"
+import { displaySortBy } from "../../utils/sortDisplay"
 
 import styles from './dropdown.module.css'
 
