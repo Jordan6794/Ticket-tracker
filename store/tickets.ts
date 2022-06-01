@@ -21,8 +21,9 @@ const ticketsSlice = createSlice({
         setTickets(state, action: PayloadAction<Ticket[]>){
             return action.payload
         },
-        addReply(state, action: PayloadAction<Answer>){
-            
+        addReply(state, action: PayloadAction<{answer: Answer, id: string}>){
+            const ticketIndex = state.findIndex(ticket => ticket.id === action.payload.id)
+            state[ticketIndex].answers.push(action.payload.answer)
         }
     }
 })

@@ -16,9 +16,11 @@ import {
 	query,
 	orderBy,
 	getDoc,
+	updateDoc,
+	arrayUnion,
 } from 'firebase/firestore/lite'
 
-import { TicketRAW } from '../components/Tickets/tickets.model'
+import { AnswerRAW, TicketRAW } from '../components/Tickets/tickets.model'
 import { ticketConverter } from '../utils/firestore-converters'
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -63,10 +65,15 @@ export async function getTicket(id: string){
 }
 
 export async function postTicket(ticket: TicketRAW) {
-	const ticketsCollec = collection(db, 'tickets').withConverter(
-		ticketConverter
-	)
 	await setDoc(doc(ticketsCollec, ticket.id), ticket)
+}
+
+export async function addAnswerToTicket(id: string, answer: AnswerRAW){
+	const ticketRef = doc(ticketsCollec, id)
+	await updateDoc(ticketRef, {
+		answers: arrayUnion(answer),
+		last_updated_date: answer.date
+	})
 }
 
 //? comment gerer le return quand fail en returnant une falsy value + error info (pour manage l'UX en fonction de l'error) ?

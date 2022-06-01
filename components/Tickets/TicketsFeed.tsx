@@ -22,16 +22,17 @@ const TicketsFeed: FunctionComponent = () => {
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    //? router.isReady ? Un peu yologuessing ici mais should be totally good
+    //! need to fetch et set mon state somewhere else ? Normal de juste le faire on top level ?
     useEffect(() => {
-        const fetchTickets2 = async() => {
+        const fetchTickets = async() => {
                 const tickets = await getTicketsFromDatabase()
                 const serializedTickets = tickets.map(ticket => serializeTicket(ticket))
                 dispatch(ticketsActions.setTickets(serializedTickets))
         }
-        fetchTickets2()
+        fetchTickets()
     }, [dispatch])
 
+    //? router.isReady ? Un peu yologuessing ici mais should be totally good
     useEffect(() => {
         if(router.isReady && tickets.length > 0){
             if(router.query.orderBy && !Array.isArray(router.query.orderBy)){

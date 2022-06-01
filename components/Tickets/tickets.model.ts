@@ -21,7 +21,7 @@ export interface TicketRAW {
 	last_updated_date: Timestamp 
 	priority: Priority 
 	status: Status
-    answers: Array<Answer>
+    answers: Array<AnswerRAW>
 }
 
 export enum Priority {
@@ -36,6 +36,12 @@ export enum Status {
 	Pending = 'Pending',
 	Resolved = 'Resolved',
 	Closed = 'Closed',
+}
+
+export interface AnswerRAW {
+    author: string
+    date: Timestamp
+    post: string
 }
 
 export interface Answer {
