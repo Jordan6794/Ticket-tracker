@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Ticket, Answer } from "../components/Tickets/tickets.model"
+import { Ticket, Answer, TicketChanges } from "../components/Tickets/tickets.model"
 
 
 const initialTicketState: Ticket[] = []
@@ -21,9 +21,17 @@ const ticketsSlice = createSlice({
         setTickets(state, action: PayloadAction<Ticket[]>){
             return action.payload
         },
-        addReply(state, action: PayloadAction<{answer: Answer, id: string}>){
+        addReply(state, action: PayloadAction<{id: string, answer: Answer}>){
             const ticketIndex = state.findIndex(ticket => ticket.id === action.payload.id)
             state[ticketIndex].answers.push(action.payload.answer)
+            state[ticketIndex].last_updated_date = action.payload.answer.date
+        },
+        updateTicket(state, action:PayloadAction<{id: string, changes: TicketChanges}>){
+            const ticketIndex = state.findIndex(ticket => ticket.id === action.payload.id)
+            state[ticketIndex] = {...state[ticketIndex], ...action.payload.changes}
+        },
+        deleteTicket(state, action: PayloadAction<string>){
+            return state.filter(ticket => ticket.id !== action.payload)
         }
     }
 })

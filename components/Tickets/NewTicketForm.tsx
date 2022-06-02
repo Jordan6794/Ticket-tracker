@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks'
 import { postTicket } from '../../lib/firebase.service'
 import { ticketsActions } from '../../store/tickets'
 import { serializeTicket } from '../../utils/serialize.util'
-import { Ticket, Priority, Status, TicketRAW } from './tickets.model'
+import { Priority, Status, TicketRAW } from './tickets.model'
 
 const NewTicketForm: FunctionComponent = () => {
 	const [formInputs, setFormInputs] = useState({

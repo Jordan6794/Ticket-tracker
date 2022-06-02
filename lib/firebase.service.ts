@@ -18,6 +18,7 @@ import {
 	getDoc,
 	updateDoc,
 	arrayUnion,
+	deleteDoc,
 } from 'firebase/firestore/lite'
 
 import { AnswerRAW, TicketRAW } from '../components/Tickets/tickets.model'
@@ -48,6 +49,7 @@ const ticketsCollec = collection(db, 'tickets').withConverter(
 	ticketConverter
 )
 
+//=== Tickets functions
 //? name fromDatabase redondant ici ou good ?
 export async function getTicketsFromDatabase() {	
 	const querySnapshot = await getDocs(ticketsCollec)
@@ -76,6 +78,18 @@ export async function addAnswerToTicket(id: string, answer: AnswerRAW){
 	})
 }
 
+export async function updateTicket(id: string, changes: object){
+	const ticketRef = doc(ticketsCollec, id)
+	await updateDoc(ticketRef, changes)
+}
+
+export async function deleteTicket(id: string){
+	const ticketRef = doc(ticketsCollec, id)
+	await deleteDoc(ticketRef)
+}
+
+
+//===Auth functions
 //? comment gerer le return quand fail en returnant une falsy value + error info (pour manage l'UX en fonction de l'error) ?
 export async function signUpUserWithUsername(
 	email: string,

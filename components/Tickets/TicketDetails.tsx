@@ -1,18 +1,21 @@
 import { Timestamp } from 'firebase/firestore/lite'
 import { useRouter } from 'next/router'
 import { FunctionComponent, useEffect, useState } from 'react'
+
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { addAnswerToTicket, getTicket } from '../../lib/firebase.service'
 import { ticketsActions } from '../../store/tickets'
+import { addAnswerToTicket, getTicket } from '../../lib/firebase.service'
+import { AnswerRAW, Ticket } from './tickets.model'
 import { getTimeAgo } from '../../utils/date.util'
 import { serializeAnswer, serializeTicket } from '../../utils/serialize.util'
+
 import AnswerDisplay from './AnswerDisplay'
 import ReplyForm from './ReplyForm'
-import { AnswerRAW, Ticket } from './tickets.model'
+import UpdateTicketForm from './UpdateTicketForm'
 
 const TicketDetails: FunctionComponent = () => {
 	const [ticket, setTicket] = useState<Ticket | null>(null)
-	const [reply, setReply] = useState(false)
+	const [isReplyFormOpen, setIsReplyFormOpen] = useState(false)
 	const router = useRouter()
 	const ticketId = router.query.id
 	const dispatch = useAppDispatch()
@@ -38,7 +41,7 @@ const TicketDetails: FunctionComponent = () => {
 	}, [router.isReady, ticketId, tickets])
 
 	function toggleReply() {
-		setReply((prev) => !prev)
+		setIsReplyFormOpen((prev) => !prev)
 	}
 
 	async function submitReply(reply: string) {
@@ -46,7 +49,7 @@ const TicketDetails: FunctionComponent = () => {
 		if (ticketId && !Array.isArray(ticketId)) {
 			await addAnswerToTicket(ticketId, answer)
 
-			dispatch(ticketsActions.addReply({ answer: serializeAnswer(answer), id: ticketId }))
+			dispatch(ticketsActions.addReply({ id: ticketId, answer: serializeAnswer(answer) }))
 		}
 	}
 
@@ -56,19 +59,22 @@ const TicketDetails: FunctionComponent = () => {
 		<div className="ticket-details">
 			<p>details id : {ticketId}</p>
 			{ticket && (
-				<div>
-					<h4>{ticket.title}</h4>
-					<p>{ticket.message}</p>
-					<p>{ticket.author}</p>
-					<p>{getTimeAgo(new Date(ticket.created_at * 1000))}</p>
-					<p>{ticket.answers.length} answer</p>
-				</div>
+				<>
+					<div>
+						<h4>{ticket.title}</h4>
+						<p>{ticket.message}</p>
+						<p>{ticket.author}</p>
+						<p>{getTimeAgo(new Date(ticket.created_at * 1000))}</p>
+						<p>{ticket.answers.length} answer</p>
+					</div>
+					{answersDisplay}
+					<button type="button" onClick={toggleReply}>
+						Reply
+					</button>
+					{isReplyFormOpen && <ReplyForm submit={submitReply} toggle={toggleReply} />}
+					<UpdateTicketForm ticket={ticket} />
+				</>
 			)}
-			{answersDisplay}
-			<button type="button" onClick={toggleReply}>
-				Reply
-			</button>
-			{reply && <ReplyForm submit={submitReply} toggle={toggleReply} />}
 		</div>
 	)
 }

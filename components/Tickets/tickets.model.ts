@@ -38,14 +38,27 @@ export enum Status {
 	Closed = 'Closed',
 }
 
-export interface AnswerRAW {
-    author: string
-    date: Timestamp
+export interface TicketChanges {
+	priority?: Priority
+	status?: Status
+	last_updated_date: number
+}
+
+export interface TicketChangesRAW {
+	priority?: Priority
+	status?: Status
+	last_updated_date: Timestamp
+}
+
+
+export interface Answer {
+	author: string
+    date: number
     post: string
 }
 
-export interface Answer {
-    author: string
-    date: number
-    post: string
+export interface AnswerRAW {
+	author: string
+	date: Timestamp
+	post: string
 }
