@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 
 import TicketsNav from "../../components/Tickets/Nav/TicketsNav";
-import TicketDetails from "../../components/Tickets/TicketDetails";
+import TicketDetails from "../../components/Tickets/Details/TicketDetails";
 
 import styles from '../../styles/tickets.module.css'
 

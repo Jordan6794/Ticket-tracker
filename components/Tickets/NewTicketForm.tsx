@@ -1,10 +1,12 @@
 import { Timestamp } from 'firebase/firestore/lite'
+import { useRouter } from 'next/router'
 import { FunctionComponent, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { postTicket } from '../../lib/firebase.service'
 import { ticketsActions } from '../../store/tickets'
+import { QUERY_CREATED_AT } from '../../utils/consts'
 import { serializeTicket } from '../../utils/serialize.util'
 import { Priority, Status, TicketRAW } from './tickets.model'
 
@@ -16,6 +18,7 @@ const NewTicketForm: FunctionComponent = () => {
 
 	const user = useAppSelector((state) => state.auth)
 	const dispatch = useAppDispatch()
+	const router = useRouter()
 
 	function onInputChange(
 		event:
@@ -50,7 +53,7 @@ const NewTicketForm: FunctionComponent = () => {
 		const serializedTicket = serializeTicket(newTicket)
 		dispatch(ticketsActions.add(serializedTicket))
 
-		resetForm()
+		router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
 	}
 
 	function resetForm() {

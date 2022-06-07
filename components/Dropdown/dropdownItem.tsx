@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { sortByActions } from '../../store/sortBy'
 import { displaySortBy } from '../../utils/sortDisplay'
+import Checkmark from '../../public/check-mark.svg'
 import styles from './dropdown.module.css'
 
 const DropdownItem: FunctionComponent<{ sort: string }> = ({ sort }) => {
@@ -12,13 +13,16 @@ const DropdownItem: FunctionComponent<{ sort: string }> = ({ sort }) => {
 		dispatch(sortByActions.set(sort))
 	}
 
+	const isCurrentActive = (currentSort === sort)
+
 	const sortDisplay = displaySortBy(sort)
 
-	const activeClass = (currentSort === sort ) ? styles.active : ''
+	const activeClass = isCurrentActive ? styles.active : ''
 
 	return (
 		<a className={`${styles.item} ${activeClass}`} onClick={handleClick}>
-			<span>{sortDisplay}</span>
+			<span className={styles.sortText}>{sortDisplay}</span>
+			{isCurrentActive && <Checkmark className={styles.checkmark} height={10} width={10}/>}
 		</a>
 	)
 }

@@ -1,10 +1,12 @@
 .togglerDiv{
     position: relative;
-    width: 100px;
 }
 
 .togglerBtn {
     width: 100%;
+    padding: 0 0.5em;
+    background-color: inherit;
+    font-size: 1em;
 }
 
 .dropdown{
@@ -24,13 +26,26 @@
 }
 
 .item {
+    position: relative;
     text-align: center;
     padding: 0 0.5em;
-    padding-top: 0.5em
+    padding-top: 0.5em;
+    cursor: pointer;
+}
+
+.sortText {
+    margin-right: 1.5em;
 }
 
 .active {
-    color: red
+    color: #2c5cc5
+}
+
+.checkmark {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    fill: #2c5cc5;
 }
 
 .item:last-child {

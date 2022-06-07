@@ -1,19 +1,16 @@
 import { NextPage } from "next";
 
-import TicketsDashboard from "../../components/Tickets/Dashboard/TicketsDashboard";
 import TicketsNav from "../../components/Tickets/Nav/TicketsNav";
-
+import NewTicketForm from "../../components/Tickets/NewTicketForm";
 import styles from '../../styles/tickets.module.css'
 
-
-const Dashboard: NextPage = () => {
-
-    return(
+const NewTicket: NextPage = () => {
+    return (
         <div className={styles.ticketsDiv}>
 			<TicketsNav />
-			<TicketsDashboard />
+			<NewTicketForm />
 		</div>
     )
 }
 
-export default Dashboard
+export default NewTicket

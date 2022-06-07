@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 
-import TicketsFeed from '../../components/Tickets/TicketsFeed'
+import TicketsFeed from '../../components/Tickets/Feed/TicketsFeed'
 import TicketsNav from '../../components/Tickets/Nav/TicketsNav'
 
 import styles from '../../styles/tickets.module.css'

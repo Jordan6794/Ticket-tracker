@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
-import { getTimeAgo } from "../../utils/date.util";
-import { Answer } from "./tickets.model";
+import { getTimeAgo } from "../../../utils/date.util";
+import { Answer } from "../tickets.model";
 
 
 const AnswerDisplay: FunctionComponent<{answer: Answer}> = ({answer}) => {

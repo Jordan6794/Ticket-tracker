@@ -1,0 +1,90 @@
+.ticketDiv{
+    background-color: #ffff;
+    padding: 1em 2em;
+    margin-bottom: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.05);
+    border: 1px solid lightgray;
+}
+
+.leftArea {
+    width: 70%;
+}
+
+.openStatus{
+    border-left: 2px solid rgba(0,0,255, 0.7);
+}
+
+.closedStatus{
+    border-left: 2px solid rgba(255,0,0,0.7);
+} 
+
+.pendingStatus{
+    border-left: 2px solid gray;
+}
+
+.resolvedStatus{
+    border-left: 2px solid rgba(0,128,0,0.7);
+}
+
+.iconClosedStatus{
+    color: rgba(255,0,0,0.7)
+} 
+
+.iconPendingStatus{
+    color: gray;
+}
+
+.iconResolvedStatus{
+    color: rgba(0,128,0,0.7)
+}
+
+.iconOpenStatus{
+    color: rgba(0,0,255, 0.7)
+}
+
+.ticketTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ticketTitle:hover {
+    color: #2c5cc5;
+    /* opacity: 0.85; */
+}
+
+.ticketAuthor {
+    color: #183247;
+}
+
+.ticketDate {
+    color: #6f7c87;
+}
+
+.createdText{
+    margin-top: 1em;
+}
+
+.rightArea{
+    margin-right: 3em;
+    text-align: right;
+}
+
+.statusParagraph,
+.priorityParagraph{
+    margin-bottom: 1em;
+}
+
+.statusParagraph,
+.priorityParagraph{
+    font-size: 0.9em;
+}
+
+.priorityText,
+.statusText {
+    font-size: 1.2em;
+}

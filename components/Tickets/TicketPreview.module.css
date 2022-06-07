@@ -1,9 +1,0 @@
-.ticketTitle {
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.ticketTitle:hover {
-    opacity: 0.85;
-}

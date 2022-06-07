@@ -2,12 +2,12 @@ import { Timestamp } from 'firebase/firestore/lite'
 import { useRouter } from 'next/router'
 import { FunctionComponent, useState } from 'react'
 
-import { useAppDispatch } from '../../hooks'
-import { deleteTicket, updateTicket } from '../../lib/firebase.service'
-import { ticketsActions } from '../../store/tickets'
-import { QUERY_CREATED_AT } from '../../utils/consts'
-import { serializeChanges } from '../../utils/serialize.util'
-import { Priority, Status, Ticket, TicketChanges, TicketChangesRAW } from './tickets.model'
+import { useAppDispatch } from '../../../hooks'
+import { deleteTicket, updateTicket } from '../../../lib/firebase.service'
+import { ticketsActions } from '../../../store/tickets'
+import { QUERY_CREATED_AT } from '../../../utils/consts'
+import { serializeChanges } from '../../../utils/serialize.util'
+import { Priority, Status, Ticket, TicketChanges, TicketChangesRAW } from '../tickets.model'
 
 const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => {
 	const [formInputs, setFormInputs] = useState<TicketChanges>({

@@ -17,7 +17,7 @@ export default function Nav() {
 		<div className={styles.nav}>
 			<ul className={styles.linkList}>
 				<li>
-					<Link href={`/tickets/feed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>Tickets</Link>
+					<Link href={`/tickets/feed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>All Tickets</Link>
 				</li>
 				<li>
 					<Link href="/">Home page</Link>
