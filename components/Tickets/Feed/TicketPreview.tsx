@@ -8,8 +8,8 @@ import { Status, Ticket } from '../tickets.model'
 import styles from './TicketPreview.module.css'
 
 const TicketPreview: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => {
-	const formatedCreatedDate = getTimeAgo(new Date(ticket.created_at * 1000))
-	const formatedUpdatedDate = getTimeAgo(new Date(ticket.last_updated_date * 1000))
+	const formatedCreatedDate = getTimeAgo(new Date(ticket.created_at * 1000), false)
+	const formatedUpdatedDate = getTimeAgo(new Date(ticket.last_updated_date * 1000), false)
 
 	let statusStyle = ''
 	let iconStatusStyle = ''

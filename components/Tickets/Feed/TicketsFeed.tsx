@@ -24,6 +24,7 @@ const TicketsFeed: FunctionComponent = () => {
 	//! need to fetch et set mon state somewhere else ? Normal de juste le faire on top level ?
 	useEffect(() => {
 		const fetchTickets = async () => {
+			//todo switch ca en firebase converter
 			const tickets = await getTicketsFromDatabase()
 			const serializedTickets = tickets.map((ticket) => serializeTicket(ticket))
 			dispatch(ticketsActions.setTickets(serializedTickets))

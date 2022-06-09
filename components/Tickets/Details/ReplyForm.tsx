@@ -1,25 +1,30 @@
 import { FunctionComponent, useState } from 'react'
 
-const ReplyForm: FunctionComponent<{ toggle: () => void, submit: (reply: string) => void }> = ({ toggle, submit }) => {
+import styles from './ReplyForm.module.css'
+
+const ReplyForm: FunctionComponent<{ title: string; toggle: () => void; submit: (reply: string) => void }> = ({ title, toggle, submit }) => {
 	const [input, setInput] = useState('')
 
 	function onSubmitForm(e: React.FormEvent) {
-        e.preventDefault()
+		e.preventDefault()
 		submit(input)
 		toggle()
 	}
 
 	return (
-		<form>
-			<textarea name="post" id="post" onChange={(event) => setInput(event.target.value)} value={input} />
+		<div className={styles.replyDiv}>
+			<form>
+				<p className={styles.replyingInfo}>Replying to : <span className={styles.title}>{title}</span></p>
+				<textarea className={styles.textArea} name="post" id="post" onChange={(event) => setInput(event.target.value)} value={input} />
 
-			<button type="button" onClick={toggle}>
-				Cancel
-			</button>
-			<button type="submit" onClick={onSubmitForm}>
-				Submit
-			</button>
-		</form>
+				<button className={`btn btn-primary ${styles.cancelBtn}`} type="button" onClick={toggle}>
+					Cancel
+				</button>
+				<button className={`btn btn-primary`} type="submit" onClick={onSubmitForm}>
+					Submit
+				</button>
+			</form>
+		</div>
 	)
 }
 

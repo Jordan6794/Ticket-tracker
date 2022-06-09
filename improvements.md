@@ -2,6 +2,7 @@
 - Faire que click sur un sorting close le dropdown (put open in redux store)
 - put active classes in SideNav
 - Refactor a bit
+- Remove duplicate models RAW, soit put number/string in DB soit use converter (go Converter, also try to use Date.toISOstring)
 - Do Dashboard stats (need to add stats data in tickets)
 - Do History (need to add stats data in tickets as well)
 

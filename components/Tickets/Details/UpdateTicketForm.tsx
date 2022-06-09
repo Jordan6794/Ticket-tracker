@@ -9,6 +9,8 @@ import { QUERY_CREATED_AT } from '../../../utils/consts'
 import { serializeChanges } from '../../../utils/serialize.util'
 import { Priority, Status, Ticket, TicketChanges, TicketChangesRAW } from '../tickets.model'
 
+import styles from './UpdateTicketForm.module.css'
+
 const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => {
 	const [formInputs, setFormInputs] = useState<TicketChanges>({
 		status: ticket.status,
@@ -54,8 +56,8 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 	return (
 		<>
 			<form>
-				<label htmlFor="status">Status</label>
-				<select name="status" id="status" onChange={(event) => onInputChange(event, 'status')} value={formInputs.status}>
+				<label className={styles.label} htmlFor="status">Status</label>
+				<select  className={styles.select} name="status" id="status" onChange={(event) => onInputChange(event, 'status')} value={formInputs.status}>
 					{Object.values(Status).map((status, i) => (
 						<option key={i} value={status}>
 							{status}
@@ -63,8 +65,8 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 					))}
 				</select>
 
-				<label htmlFor="priority">Priority</label>
-				<select name="priority" id="priority" onChange={(event) => onInputChange(event, 'priority')} value={formInputs.priority}>
+				<label className={styles.label} htmlFor="priority">Priority</label>
+				<select  className={styles.select} name="priority" id="priority" onChange={(event) => onInputChange(event, 'priority')} value={formInputs.priority}>
 					{Object.values(Priority).map((priority, i) => (
 						<option key={i} value={priority}>
 							{priority}
@@ -72,16 +74,16 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 					))}
 				</select>
 
-				<button disabled={!didInputsChange} type="submit" onClick={onSubmitForm}>
+				<button disabled={!didInputsChange} className={`btn btn-primary ${styles.btn} ${styles.updateBtn}`} type="submit" onClick={onSubmitForm}>
 					{isUpdating ? 'Updating...' : 'Update'}
 				</button>
 			</form>
 			{ticket.status !== Status.Resolved && (
-				<button type="button" onClick={handleSolveTicket}>
+				<button type="button" className={`btn btn-primary ${styles.btn} ${styles.resolveBtn}`} onClick={handleSolveTicket}>
 					Resolved
 				</button>
 			)}
-                <button type="button" onClick={handleDelete}>
+                <button type="button" className={`btn btn-primary ${styles.btn} ${styles.deleteBtn}`} onClick={handleDelete}>
 					Delete
 				</button>
 		</>

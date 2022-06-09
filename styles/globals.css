@@ -8,7 +8,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  color: #183247
+  color: #183247;
 }
 
 a {
@@ -64,4 +64,13 @@ Common Divs */
 .container {
   width: 74%;
   margin: 0 auto;
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.margins-top-bottom {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
 }

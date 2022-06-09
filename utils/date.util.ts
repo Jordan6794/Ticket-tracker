@@ -34,7 +34,7 @@ const MONTH_NAMES = [
   
   
   // --- Main function
-  export function getTimeAgo(dateParam: Date) {
+  export function getTimeAgo(dateParam: Date, full: boolean) {
     if (!dateParam) {
       return null;
     }
@@ -44,26 +44,31 @@ const MONTH_NAMES = [
     const yesterday = new Date(today.getTime() - DAY_IN_MS);
     const seconds = Math.round((today.getTime() - dateParam.getTime()) / 1000);
     const minutes = Math.round(seconds / 60);
+    const days = Math.round(minutes / 3600 )
     const isToday = today.toDateString() === dateParam.toDateString();
     const isYesterday = yesterday.toDateString() === dateParam.toDateString();
     const isThisYear = today.getFullYear() === dateParam.getFullYear();
   
-  
-    if (seconds < 5) {
-      return 'now';
-    } else if (seconds < 60) {
-      return `${ seconds } seconds ago`;
-    } else if (seconds < 90) {
-      return 'about a minute ago';
-    } else if (minutes < 60) {
-      return `${ minutes } minutes ago`;
-    } else if (isToday) {
-      return getFormattedDate(dateParam, 'Today'); // Today at 10:20
-    } else if (isYesterday) {
-      return getFormattedDate(dateParam, 'Yesterday'); // Yesterday at 10:20
-    } else if (isThisYear) {
-      return getFormattedDate(dateParam, '', true); // 10. January at 10:20
+    if(full){
+      return getFormattedDate(dateParam); // 10. January 2017. at 10:20
+    } else {
+      if (seconds < 5) {
+        return 'now';
+      } else if (seconds < 60) {
+        return `${ seconds } seconds ago`;
+      } else if (seconds < 90) {
+        return 'about a minute ago';
+      } else if (minutes < 60) {
+        return `${ minutes } minutes ago`;
+      } else if (isToday) {
+        return getFormattedDate(dateParam, 'Today'); // Today at 10:20
+      } else if (isYesterday) {
+        return getFormattedDate(dateParam, 'Yesterday'); // Yesterday at 10:20
+      } else if (isThisYear) {
+        return `${ days } days ago`
+        // return getFormattedDate(dateParam, '', true); // 10. January at 10:20
+      }
+    
+      return getFormattedDate(dateParam); // 10. January 2017. at 10:20
     }
-  
-    return getFormattedDate(dateParam); // 10. January 2017. at 10:20
   }

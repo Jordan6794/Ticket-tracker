@@ -50,7 +50,6 @@ export interface TicketChangesRAW {
 	last_updated_date: Timestamp
 }
 
-
 export interface Answer {
 	author: string
     date: number
