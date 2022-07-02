@@ -13,15 +13,13 @@ import {
 	getDocs,
 	setDoc,
 	doc,
-	query,
-	orderBy,
 	getDoc,
 	updateDoc,
 	arrayUnion,
 	deleteDoc,
 } from 'firebase/firestore/lite'
 
-import { AnswerRAW, TicketRAW } from '../components/Tickets/tickets.model'
+import { Answer, Ticket, TicketChanges } from '../components/Tickets/tickets.model'
 import { ticketConverter } from '../utils/firestore-converters'
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -45,9 +43,7 @@ const db = getFirestore(app)
 const auth = getAuth(app)
 // const analytics = getAnalytics(app);
 
-const ticketsCollec = collection(db, 'tickets').withConverter(
-	ticketConverter
-)
+const ticketsCollec = collection(db, 'tickets').withConverter(ticketConverter)
 
 //=== Tickets functions
 //? name fromDatabase redondant ici ou good ?
@@ -66,11 +62,11 @@ export async function getTicket(id: string){
 	}
 }
 
-export async function postTicket(ticket: TicketRAW) {
+export async function postTicket(ticket: Ticket) {
 	await setDoc(doc(ticketsCollec, ticket.id), ticket)
 }
 
-export async function addAnswerToTicket(id: string, answer: AnswerRAW){
+export async function addAnswerToTicket(id: string, answer: Answer){
 	const ticketRef = doc(ticketsCollec, id)
 	await updateDoc(ticketRef, {
 		answers: arrayUnion(answer),
@@ -78,7 +74,7 @@ export async function addAnswerToTicket(id: string, answer: AnswerRAW){
 	})
 }
 
-export async function updateTicket(id: string, changes: object){
+export async function updateTicket(id: string, changes: TicketChanges){
 	const ticketRef = doc(ticketsCollec, id)
 	await updateDoc(ticketRef, changes)
 }

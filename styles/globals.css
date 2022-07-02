@@ -53,6 +53,13 @@ Buttons */
   padding: 0.4em 1em;
 }
 
+.btn-cancel {
+  background-color: white;
+  border: 1px solid lightgray;
+  color: black;
+  margin-right: 1em;
+}
+
 
 /* ========
 Common Divs */
@@ -66,11 +73,21 @@ Common Divs */
   margin: 0 auto;
 }
 
-.white-bg {
-  background-color: white;
+.white-container {
+    background-color: white;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+    border-radius: 10px;
 }
 
-.margins-top-bottom {
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
+/* ========
+Nav */
+.active::after {
+  content: '';
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 4px;
+  height: 1px;
+  background-color: white;
 }

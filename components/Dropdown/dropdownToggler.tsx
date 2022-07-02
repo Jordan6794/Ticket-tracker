@@ -7,11 +7,12 @@ import { displaySortBy } from '../../utils/sortDisplay'
 import Caret from '../../public/caret.svg'
 
 import styles from './dropdown.module.css'
+import { dropdownActions } from '../../store/dropdown'
 
 const DropdownToggler: FunctionComponent<{ children?: JSX.Element[] | JSX.Element }> = (props) => {
-	const [open, setOpen] = useState(false)
 	const [isMounted, setIsMounted] = useState(false)
-	const sortBy = useAppSelector((state) => state.sortBy)
+	const sortBy = useAppSelector(state => state.sortBy)
+	const open = useAppSelector(state => state.dropdown)
 	const router = useRouter()
 	const dispatch = useAppDispatch()
 
@@ -37,7 +38,7 @@ const DropdownToggler: FunctionComponent<{ children?: JSX.Element[] | JSX.Elemen
 
 	return (
 		<div className={styles.togglerDiv}>
-			<button className={`btn ${styles.togglerBtn}`} onClick={() => setOpen((prevState) => !prevState)}>
+			<button className={`btn ${styles.togglerBtn}`} onClick={() => dispatch(dropdownActions.toggle())}>
 				{`${sortByDisplay} `}
 				<Caret height={9} width={9} />
 			</button>

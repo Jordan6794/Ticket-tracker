@@ -2,7 +2,9 @@
 .replyDiv {
     margin-top: 1.5em;
     padding: 1em;
-    background-color: #F5F7F9;
+    /* background-color: #F5F7F9;
+    border-radius: 14px;
+    box-shadow: 2px 2px 6px rgba(0,0,0, 0.3) */
 }
 
 .textArea {
@@ -15,13 +17,6 @@
 
 .textArea:focus {
     outline: none;
-}
-
-.cancelBtn {
-    background-color: white;
-    border: 1px solid lightgray;
-    color: black;
-    margin-right: 1em;
 }
 
 .title {

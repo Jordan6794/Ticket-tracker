@@ -5,9 +5,8 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { ticketsActions } from '../../../store/tickets'
 import { addAnswerToTicket, getTicket } from '../../../lib/firebase.service'
-import { AnswerRAW, Ticket } from '../tickets.model'
+import { Answer, Ticket } from '../tickets.model'
 import { getTimeAgo } from '../../../utils/date.util'
-import { serializeAnswer, serializeTicket } from '../../../utils/serialize.util'
 
 import AnswerDisplay from './AnswerDisplay'
 import ReplyForm from './ReplyForm'
@@ -24,23 +23,21 @@ const TicketDetails: FunctionComponent = () => {
 	const dispatch = useAppDispatch()
 	const user = useAppSelector((state) => state.auth)
 
-	//? way un peu tordu d'update mon ticket state ? Je dispatch un change dans mes tickets state (after push to db)
-	//? -> qui va rerun l'effect qui fetch le ticket corespondant de la db
-	//? answ : de toute facon should not load state from db but from redux here
 	const tickets = useAppSelector((state) => state.tickets)
 
 	useEffect(() => {
-		async function fetchTicket() {
+		async function updateTicket() {
 			if (ticketId !== undefined && !Array.isArray(ticketId)) {
-				const result = await getTicket(ticketId)
-				if (result) {
-					setTicket(serializeTicket(result))
+				const foundTicket = tickets.find(ticket => ticket.id === ticketId)
+				if(foundTicket){
+					setTicket(foundTicket)
 				}
+				//todo can put an else if ticket not found
 			}
 		}
 
 		if (router.isReady) {
-			fetchTicket()
+			updateTicket()
 		}
 	}, [router.isReady, ticketId, tickets])
 
@@ -49,11 +46,10 @@ const TicketDetails: FunctionComponent = () => {
 	}
 
 	async function submitReply(reply: string) {
-		const answer: AnswerRAW = { author: user.username ?? 'anonymous', date: Timestamp.now(), post: reply }
+		const answer: Answer = { author: user.username ?? 'anonymous', date: Timestamp.now().seconds, post: reply }
 		if (ticketId && !Array.isArray(ticketId)) {
 			await addAnswerToTicket(ticketId, answer)
-
-			dispatch(ticketsActions.addReply({ id: ticketId, answer: serializeAnswer(answer) }))
+			dispatch(ticketsActions.addReply({ id: ticketId, answer }))
 		}
 	}
 
@@ -63,7 +59,7 @@ const TicketDetails: FunctionComponent = () => {
 
 	return (
 		<div className="content-div">
-			<div className="container white-bg margins-top-bottom">
+			<div className={`container white-container`}>
 				{ticket && (
 					<div className={styles.ticketDiv}>
 						<div className={styles.leftArea}>

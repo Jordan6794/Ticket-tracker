@@ -17,7 +17,7 @@ const ReplyForm: FunctionComponent<{ title: string; toggle: () => void; submit: 
 				<p className={styles.replyingInfo}>Replying to : <span className={styles.title}>{title}</span></p>
 				<textarea className={styles.textArea} name="post" id="post" onChange={(event) => setInput(event.target.value)} value={input} />
 
-				<button className={`btn btn-primary ${styles.cancelBtn}`} type="button" onClick={toggle}>
+				<button className={`btn btn-primary btn-cancel `} type="button" onClick={toggle}>
 					Cancel
 				</button>
 				<button className={`btn btn-primary`} type="submit" onClick={onSubmitForm}>

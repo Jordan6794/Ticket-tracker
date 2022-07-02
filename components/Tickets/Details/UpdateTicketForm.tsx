@@ -6,8 +6,7 @@ import { useAppDispatch } from '../../../hooks'
 import { deleteTicket, updateTicket } from '../../../lib/firebase.service'
 import { ticketsActions } from '../../../store/tickets'
 import { QUERY_CREATED_AT } from '../../../utils/consts'
-import { serializeChanges } from '../../../utils/serialize.util'
-import { Priority, Status, Ticket, TicketChanges, TicketChangesRAW } from '../tickets.model'
+import { Priority, Status, Ticket, TicketChanges } from '../tickets.model'
 
 import styles from './UpdateTicketForm.module.css'
 
@@ -31,20 +30,18 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 
 	async function onSubmitForm(event: React.FormEvent) {
 		event.preventDefault()
-        const changes: TicketChangesRAW = {...formInputs, last_updated_date: Timestamp.now()}
+        const changes: TicketChanges = {...formInputs, last_updated_date: Timestamp.now().seconds}
 		setIsUpdating(true)
 		//? update le last_updated_time in my fonctions rather than here ? Need be carefull to have same in both foncts
 		await updateTicket(ticket.id, changes)
-        const serializedChanges = serializeChanges(changes)
-		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes: serializedChanges }))
+		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes }))
 		setIsUpdating(false)
 	}
 
 	async function handleSolveTicket() {
-		const changes: TicketChangesRAW = { status: Status.Resolved, last_updated_date: Timestamp.now() }
+		const changes: TicketChanges = { status: Status.Resolved, last_updated_date: Timestamp.now().seconds }
 		await updateTicket(ticket.id, changes)
-        const serializedChanges = serializeChanges(changes)
-		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes: serializedChanges }))
+		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes }))
 	}
 
     async function handleDelete(){
@@ -80,7 +77,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 			</form>
 			{ticket.status !== Status.Resolved && (
 				<button type="button" className={`btn btn-primary ${styles.btn} ${styles.resolveBtn}`} onClick={handleSolveTicket}>
-					Resolved
+					Resolve
 				</button>
 			)}
                 <button type="button" className={`btn btn-primary ${styles.btn} ${styles.deleteBtn}`} onClick={handleDelete}>

@@ -3,7 +3,6 @@ import { FunctionComponent } from 'react'
 
 import { getTimeAgo } from '../../../utils/date.util'
 import { Status, Ticket } from '../tickets.model'
-// import Profile from '../../public/abstract-user-flat-2.svg'
 
 import styles from './TicketPreview.module.css'
 

@@ -1,0 +1,39 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em 0;
+}
+
+.pageTitle {
+    margin: 0;
+    margin-bottom: 1em;
+    font-weight: 700;
+    font-size: 1.65rem;
+}
+.input {
+    margin-bottom: 0.5em;
+    font-family: inherit;
+    padding: 0.4em 0;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.textArea {
+    font-family: inherit;
+    resize: none;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 1em;
+}
+
+.textArea:focus {
+    outline: none;
+}
+
+.btn {
+    width: 18%;
+}

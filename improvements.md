@@ -1,19 +1,23 @@
-- Design
-- Faire que click sur un sorting close le dropdown (put open in redux store)
-- put active classes in SideNav
+- Load state on top level app
 - Refactor a bit
-- Remove duplicate models RAW, soit put number/string in DB soit use converter (go Converter, also try to use Date.toISOstring)
 - Do Dashboard stats (need to add stats data in tickets)
 - Do History (need to add stats data in tickets as well)
 
+try :
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.12);
+
 Later :
-- Add un title pour les pages quelque part (soit dans la Nav soit dans each page)
+- Get better SideNav icons, and design correctly active NavLink (try to put a after with underline ?)
+- Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken
+- check le server side render thingy
+- Add un title pour les pages quelque part (soit dans la Nav soit dans each page) : probably juste dans la page pour ticket feed on top : All Tickets
 - put home page ('/') into redirect to ticket feed ?
 - Put a search on the topBar ?
 - Faire une partie archived tickets ?
 - Make small modal on success update of ticket
 - Check confirmations que firebase request succesfull avant de dispatch le local state
 
+- Put something if ticket not found in ticket details
 - Faire un onglet changes history ? (not hard, need to make a collection history with an array of Changes objects (make type))
 - Manage + display errors for auth singin/signup
 - Implement archiving ?

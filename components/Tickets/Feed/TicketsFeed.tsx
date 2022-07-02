@@ -2,11 +2,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FunctionComponent, useEffect, useState } from 'react'
 
-import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { getTicketsFromDatabase } from '../../../lib/firebase.service'
+import { useAppSelector } from '../../../hooks'
 
-import { ticketsActions } from '../../../store/tickets'
-import { serializeTicket } from '../../../utils/serialize.util'
 import { sortTickets } from '../../../utils/sortTickets.util'
 import Filter from '../Filter/Filter'
 
@@ -18,19 +15,7 @@ import styles from './TicketsFeed.module.css'
 const TicketsFeed: FunctionComponent = () => {
 	const [sortedTickets, setSortedTickets] = useState<Ticket[]>([])
 	const tickets = useAppSelector((state) => state.tickets)
-	const dispatch = useAppDispatch()
 	const router = useRouter()
-
-	//! need to fetch et set mon state somewhere else ? Normal de juste le faire on top level ?
-	useEffect(() => {
-		const fetchTickets = async () => {
-			//todo switch ca en firebase converter
-			const tickets = await getTicketsFromDatabase()
-			const serializedTickets = tickets.map((ticket) => serializeTicket(ticket))
-			dispatch(ticketsActions.setTickets(serializedTickets))
-		}
-		fetchTickets()
-	}, [dispatch])
 
 	useEffect(() => {
 		if (!router.isReady) return

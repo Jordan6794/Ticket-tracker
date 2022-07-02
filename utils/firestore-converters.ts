@@ -1,15 +1,16 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, WithFieldValue } from "firebase/firestore/lite";
-import { TicketRAW } from "../components/Tickets/tickets.model";
+import { Ticket } from "../components/Tickets/tickets.model";
 
 
-
-export const ticketConverter: FirestoreDataConverter<TicketRAW> = {
-    toFirestore(ticket: WithFieldValue<TicketRAW>): DocumentData{
+//? Useless to convert numbers/Timestamp because updateDoc does not call covnerter, which makes everything crumble
+//? => So we put Timestamp in numbers in DB too and drop conversions
+export const ticketConverter: FirestoreDataConverter<Ticket> = {
+    toFirestore(ticket: WithFieldValue<Ticket>): DocumentData{
         return ticket
     },
 
-    fromFirestore(snapshot: QueryDocumentSnapshot): TicketRAW{
+    fromFirestore(snapshot: QueryDocumentSnapshot): Ticket{
         const data = snapshot.data()!
-		return data as TicketRAW
+		return data as Ticket
     }
 }
