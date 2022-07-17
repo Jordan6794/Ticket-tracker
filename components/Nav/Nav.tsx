@@ -15,13 +15,10 @@ export default function Nav() {
 
 	return (
 		<div className={styles.nav}>
+			<div className={styles.logoDiv}>
+				<h3>Team Ticket</h3>
+			</div>
 			<ul className={styles.linkList}>
-				<li>
-					<Link href={`/tickets/feed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>All Tickets</Link>
-				</li>
-				<li>
-					<Link href="/">Home page</Link>
-				</li>
 				{!user.id && (
 					<li>
 						<Link href="/auth">Login</Link>

@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 
-import TicketsNav from "../../components/Tickets/Nav/TicketsNav";
+import SideNav from "../../components/Tickets/SideNav/SideNav";
 import NewTicketForm from "../../components/Tickets/NewTicketForm";
-import styles from '../../styles/tickets.module.css'
 
 const NewTicket: NextPage = () => {
     return (
-        <div className={styles.ticketsDiv}>
-			<TicketsNav />
+        <div className='wrapper'>
+			<SideNav />
 			<NewTicketForm />
 		</div>
     )

@@ -1,10 +1,8 @@
 .navDiv {
-    width: 5%;
-    min-width: 40px;
-    max-width: 60px;
+    width: var(--sideNav-width);
     background-color: #12344D;
     padding: 3em 0em;
-    position: sticky;
+    position: fixed;
     top: 7vh;
     height: 93vh;
     z-index: 10;

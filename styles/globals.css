@@ -1,5 +1,6 @@
 :root{
   --text-color: #dadce1;
+  --sideNav-width: 300px;
 }
 
 html,
@@ -63,8 +64,13 @@ Buttons */
 
 /* ========
 Common Divs */
+.wrapper {
+  display: flex;
+}
+
 .content-div {
   width: 100%;
+  padding-left: var(--sideNav-width);
   background-color: #EBEFF3;
 }
 

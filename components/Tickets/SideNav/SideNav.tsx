@@ -8,9 +8,9 @@ import PieLogo from '../../../public/category.svg'
 import ArticlesLogo from '../../../public/articles.svg'
 import HistoryLogo from '../../../public/history-line.svg'
 
-import styles from './TicketsNav.module.css'
+import styles from './SideNav.module.css'
 
-const TicketsNav: FunctionComponent = () => {
+const SideNav: FunctionComponent = () => {
 	const router = useRouter()
 
 	return (
@@ -45,4 +45,4 @@ const TicketsNav: FunctionComponent = () => {
 	)
 }
 
-export default TicketsNav
+export default SideNav

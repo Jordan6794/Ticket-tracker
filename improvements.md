@@ -1,12 +1,19 @@
-- Load state on top level app
-- Refactor a bit
+- Design like benci
+: Put nav in 2 div with one logo div (same width as side nav) + wider nav (responsive)
+: better icons for leftNav
+: Nav parts: Dashboard/stats , All tickets, (new ticket?), archived/closed tickets, (history ?)
 - Do Dashboard stats (need to add stats data in tickets)
+
+- Fix date
+- Refactor a bit
+- Name/branding : Team Ticket ?
 - Do History (need to add stats data in tickets as well)
 
 try :
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.12);
 
 Later :
+- Team/assign people to tickets
 - Get better SideNav icons, and design correctly active NavLink (try to put a after with underline ?)
 - Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken
 - check le server side render thingy

@@ -1,16 +1,13 @@
 import { NextPage } from "next";
 
 import TicketsDashboard from "../../components/Tickets/Dashboard/TicketsDashboard";
-import TicketsNav from "../../components/Tickets/Nav/TicketsNav";
-
-import styles from '../../styles/tickets.module.css'
-
+import SideNav from "../../components/Tickets/SideNav/SideNav";
 
 const Dashboard: NextPage = () => {
 
     return(
-        <div className={styles.ticketsDiv}>
-			<TicketsNav />
+        <div className='wrapper'>
+			<SideNav />
 			<TicketsDashboard />
 		</div>
     )
