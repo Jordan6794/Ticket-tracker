@@ -2,11 +2,12 @@
 : Put nav in 2 div with one logo div (same width as side nav) + wider nav (responsive)
 : better icons for leftNav
 : Nav parts: Dashboard/stats , All tickets, (new ticket?), archived/closed tickets, (history ?)
-- Do Dashboard stats (need to add stats data in tickets)
 
 - Fix date
-- Refactor a bit
 - Name/branding : Team Ticket ?
+- Redo ticket feed design : smaller height et less space in between (need like 10ish tickets par page izi) + put project/type in display
+- Better design for active leftNav
+- Redesign new ticket (can check design for update ticket)
 - Do History (need to add stats data in tickets as well)
 
 try :
@@ -14,7 +15,8 @@ try :
 
 Later :
 - Team/assign people to tickets
-- Get better SideNav icons, and design correctly active NavLink (try to put a after with underline ?)
+- Pagination for ticket feed
+- Refactor a bit
 - Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken
 - check le server side render thingy
 - Add un title pour les pages quelque part (soit dans la Nav soit dans each page) : probably juste dans la page pour ticket feed on top : All Tickets

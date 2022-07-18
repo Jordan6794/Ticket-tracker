@@ -4,7 +4,8 @@
     justify-content: space-between;
     height: 7vh;
     background-color: white;
-    border-bottom: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
+    box-shadow: 1px 0 7px rgba(0,0,0,.05);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -12,7 +13,11 @@
 
 .logoDiv {
     width: var(--sideNav-width);
-    border-right: 1px solid lightgray;
+    border-right: 1px solid rgba(120,130,140,.13);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .linkList {

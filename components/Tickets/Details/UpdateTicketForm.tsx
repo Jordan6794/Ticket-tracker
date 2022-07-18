@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../../hooks'
 import { deleteTicket, updateTicket } from '../../../lib/firebase.service'
 import { ticketsActions } from '../../../store/tickets'
 import { QUERY_CREATED_AT } from '../../../utils/consts'
-import { Priority, Status, Ticket, TicketChanges } from '../tickets.model'
+import { Priority, Project, Status, Ticket, TicketChanges, Type } from '../tickets.model'
 
 import styles from './UpdateTicketForm.module.css'
 
@@ -14,6 +14,8 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 	const [formInputs, setFormInputs] = useState<TicketChanges>({
 		status: ticket.status,
 		priority: ticket.priority,
+		type: ticket.type,
+		project: ticket.project,
 		last_updated_date: ticket.last_updated_date,
 	})
 	const [didInputsChange, setDidInputChange] = useState(false)
@@ -67,6 +69,24 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 					{Object.values(Priority).map((priority, i) => (
 						<option key={i} value={priority}>
 							{priority}
+						</option>
+					))}
+				</select>
+
+				<label className={styles.label} htmlFor="type">Type</label>
+				<select  className={styles.select} name="type" id="type" onChange={(event) => onInputChange(event, 'type')} value={formInputs.type}>
+					{Object.values(Type).map((type, i) => (
+						<option key={i} value={type}>
+							{type}
+						</option>
+					))}
+				</select>
+
+				<label className={styles.label} htmlFor="project">Project</label>
+				<select  className={styles.select} name="project" id="project" onChange={(event) => onInputChange(event, 'project')} value={formInputs.project}>
+					{Object.values(Project).map((project, i) => (
+						<option key={i} value={project}>
+							{project}
 						</option>
 					))}
 				</select>

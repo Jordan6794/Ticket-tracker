@@ -8,6 +8,8 @@ export interface Ticket {
 	last_updated_date: number
 	priority: Priority 
 	status: Status
+	type: Type
+	project: Project
     answers: Array<Answer>
 }
 
@@ -25,9 +27,25 @@ export enum Status {
 	Closed = 'Closed',
 }
 
+export enum Type {
+	NewFeature = 'New Feature',
+	Design = 'Design',
+	Bug = 'Bug',
+	Other = 'Other'
+}
+
+export enum Project {
+	Portfolio = 'Personal Portfolio',
+	Tickets = 'Team Ticket',
+	Habits = 'Habit Streak',
+	Other = 'Other'
+}
+
 export interface TicketChanges {
 	priority?: Priority
 	status?: Status
+	project?: Project
+	type?: Type
 	last_updated_date: number
 }
 

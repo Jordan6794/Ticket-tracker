@@ -21,7 +21,7 @@ a {
   box-sizing: border-box;
 }
 
-p {
+h1, h2, h3, p {
   margin: 0;
 }
 
@@ -70,6 +70,7 @@ Common Divs */
 
 .content-div {
   width: 100%;
+  min-height: 93vh;
   padding-left: var(--sideNav-width);
   background-color: #EBEFF3;
 }

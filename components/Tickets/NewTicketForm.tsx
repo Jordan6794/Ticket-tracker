@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks'
 import { postTicket } from '../../lib/firebase.service'
 import { ticketsActions } from '../../store/tickets'
 import { QUERY_CREATED_AT } from '../../utils/consts'
-import { Priority, Status, Ticket } from './tickets.model'
+import { Priority, Status, Type, Ticket, Project } from './tickets.model'
 
 import styles from './NewTicketForm.module.css'
 
@@ -15,13 +15,16 @@ const NewTicketForm: FunctionComponent = () => {
 	const [formInputs, setFormInputs] = useState({
 		title: '',
 		post: '',
+		priority: Priority.Medium,
+		type: Type.NewFeature,
+		project: Project.Habits
 	})
 
 	const user = useAppSelector((state) => state.auth)
 	const dispatch = useAppDispatch()
 	const router = useRouter()
 
-	function onInputChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, inputName: string) {
+	function onInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, inputName: string) {
 		const newInput = event.target.value
 
 		setFormInputs((prevInputs) => ({ ...prevInputs, [inputName]: newInput }))
@@ -42,8 +45,10 @@ const NewTicketForm: FunctionComponent = () => {
 			id: uuidv4(),
 			created_at: currentDate,
 			last_updated_date: currentDate,
-			priority: Priority.Low,
+			priority: formInputs.priority,
 			status: Status.Open,
+			type: formInputs.type,
+			project: formInputs.project,
 			answers: [],
 		}
 
@@ -69,6 +74,33 @@ const NewTicketForm: FunctionComponent = () => {
 						onChange={(event) => onInputChange(event, 'title')}
 						value={formInputs.title}
 					/>
+
+					<label className={styles.label} htmlFor="priority">Priority</label>
+					<select  className={styles.select} name="priority" id="priority" onChange={(event) => onInputChange(event, 'priority')} value={formInputs.priority}>
+						{Object.values(Priority).map((priority, i) => (
+							<option key={i} value={priority}>
+								{priority}
+							</option>
+						))}
+					</select>
+
+					<label className={styles.label} htmlFor="project">Project</label>
+					<select  className={styles.select} name="project" id="project" onChange={(event) => onInputChange(event, 'project')} value={formInputs.priority}>
+						{Object.values(Project).map((project, i) => (
+							<option key={i} value={project}>
+								{project}
+							</option>
+						))}
+					</select>
+
+					<label className={styles.label} htmlFor="type">Type</label>
+					<select  className={styles.select} name="type" id="type" onChange={(event) => onInputChange(event, 'type')} value={formInputs.type}>
+						{Object.values(Type).map((type, i) => (
+							<option key={i} value={type}>
+								{type}
+							</option>
+						))}
+					</select>
 
 					<label htmlFor="post">Post</label>
 					<textarea className={styles.textArea} name="post" id="post" onChange={(event) => onInputChange(event, 'post')} value={formInputs.post} />
