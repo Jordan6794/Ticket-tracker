@@ -4,9 +4,9 @@ import { FunctionComponent } from 'react'
 
 import { QUERY_CREATED_AT, QUERY_ORDER_BY } from '../../../utils/consts'
 
-import PieLogo from '../../../public/category.svg'
-import ArticlesLogo from '../../../public/articles.svg'
-import HistoryLogo from '../../../public/history-line.svg'
+import Dashboard from '../../../public/leaderboardF.svg'
+import Tickets from '../../../public/storage.svg'
+import HistoryLogo from '../../../public/history.svg'
 
 import styles from './SideNav.module.css'
 
@@ -16,30 +16,35 @@ const SideNav: FunctionComponent = () => {
 	return (
 		<div className={styles.navDiv}>
 			<ul>
-				<li className={styles.navItem}>
-					<Link href="/tickets/dashboard">
-						<div className={`${router.pathname === '/tickets/dashboard' ? 'active' : ''}`}>
-							<PieLogo className={styles.navIcon} width={30} height={30} />
-							<span className={styles.tooltipText}>Dashboard</span>
+				<div className={styles.devider}></div>
+				<Link href="/tickets/dashboard">
+					<li className={`${styles.navItem} ${router.pathname === '/tickets/dashboard' ? `${styles.active}` : ''}`}>
+						<div className={`${styles.navElement} `}>
+							<Dashboard className={styles.navIcon} />
+							<span className={styles.navText}>Dashboard</span>
 						</div>
-					</Link>
-				</li>
-				<li className={styles.navItem}>
-					<Link href={`/tickets/feed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>
-						<div className={`${router.pathname === '/tickets/feed' ? 'active' : ''}`}>
-							<ArticlesLogo className={styles.navIcon} width={30} height={30} />
-							<span className={styles.tooltipText}>Tickets</span>
+					</li>
+				</Link>
+
+				<div className={styles.devider}></div>
+				<Link href={`/tickets/feed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>
+					<li className={`${styles.navItem} ${router.pathname === '/tickets/feed' ? `${styles.active}` : ''}`}>
+						<div className={`${styles.navElement}`}>
+							<Tickets className={styles.navIcon} />
+							<span className={styles.navText}>Tickets</span>
 						</div>
-					</Link>
-				</li>
-				<li className={styles.navItem}>
-					<Link href="/tickets/history">
-						<div className={`${router.pathname === '/tickets/history' ? 'active' : ''}`}>
-							<HistoryLogo className={styles.navIcon} width={30} height={30} />
-							<span className={styles.tooltipText}>History</span>
+					</li>
+				</Link>
+				<div className={styles.devider}></div>
+				<Link href="/tickets/history">
+					<li className={`${styles.navItem} ${router.pathname === '/tickets/history' ? `${styles.active}` : ''}`}>
+						<div className={`${styles.navElement}`}>
+							<HistoryLogo className={styles.navIcon} />
+							<span className={styles.navText}>History</span>
 						</div>
-					</Link>
-				</li>
+					</li>
+				</Link>
+				<div className={styles.devider}></div>
 			</ul>
 		</div>
 	)

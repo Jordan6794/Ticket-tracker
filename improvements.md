@@ -1,26 +1,23 @@
-- Design like benci
-: Put nav in 2 div with one logo div (same width as side nav) + wider nav (responsive)
-: better icons for leftNav
-: Nav parts: Dashboard/stats , All tickets, (new ticket?), archived/closed tickets, (history ?)
-
 - Fix date
-- Name/branding : Team Ticket ?
 - Redo ticket feed design : smaller height et less space in between (need like 10ish tickets par page izi) + put project/type in display
-- Better design for active leftNav
+: + make un btn see more/edit in the design too, can not only be hover on title text
 - Redesign new ticket (can check design for update ticket)
 - Do History (need to add stats data in tickets as well)
+- Add un title pour les pages quelque part (soit dans la Nav soit dans each page) : probably juste dans la page pour ticket feed on top : All Tickets
+: Need to see how I put le filtre toppart du coup
 
-try :
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.12);
+- Finish sideNav : put part on top of navItems? make responsivity (expand on hover on smaller and hanburger on mobile)
+- Nav parts: Dashboard/stats , All tickets, (new ticket?), archived/closed tickets, (history ?)
+- Do home/login page
 
 Later :
 - Team/assign people to tickets
 - Pagination for ticket feed
+- Team Ticket Logo ? At least better design/fonts if just text
 - Refactor a bit
 - Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken
 - check le server side render thingy
-- Add un title pour les pages quelque part (soit dans la Nav soit dans each page) : probably juste dans la page pour ticket feed on top : All Tickets
-- put home page ('/') into redirect to ticket feed ?
+- put auth redirectguard
 - Put a search on the topBar ?
 - Faire une partie archived tickets ?
 - Make small modal on success update of ticket
@@ -31,7 +28,6 @@ Later :
 - Manage + display errors for auth singin/signup
 - Implement archiving ?
 - Make sorting priority/status custom order rather than just sorted alphabetically
-- Put un routing guard pour que le mec puisse pas acces auth quand logged in ?
 - Add ascending / descending options for query
 - Make a dropdown to edit status/prio from ticketpreview ?
 - Add profile picture (with default one ?) to users ?
