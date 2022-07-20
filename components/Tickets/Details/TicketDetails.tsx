@@ -4,7 +4,7 @@ import { FunctionComponent, useEffect, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { ticketsActions } from '../../../store/tickets'
-import { addAnswerToTicket, getTicket } from '../../../lib/firebase.service'
+import { addAnswerToTicket } from '../../../lib/firebase.service'
 import { Answer, Ticket } from '../tickets.model'
 import { getTimeAgo } from '../../../utils/date.util'
 
@@ -15,7 +15,6 @@ import UpdateTicketForm from './UpdateTicketForm'
 import styles from './TicketDetails.module.css'
 
 const TicketDetails: FunctionComponent = () => {
-	//! charger state depuis redux 
 	const [ticket, setTicket] = useState<Ticket | null>(null)
 	const [isReplyFormOpen, setIsReplyFormOpen] = useState(false)
 	const router = useRouter()
@@ -23,7 +22,7 @@ const TicketDetails: FunctionComponent = () => {
 	const dispatch = useAppDispatch()
 	const user = useAppSelector((state) => state.auth)
 
-	const tickets = useAppSelector((state) => state.tickets)
+	const tickets = useAppSelector((state) => state.tickets.tickets)
 
 	useEffect(() => {
 		async function updateTicket() {

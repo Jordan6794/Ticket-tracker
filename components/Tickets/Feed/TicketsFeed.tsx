@@ -14,7 +14,7 @@ import styles from './TicketsFeed.module.css'
 
 const TicketsFeed: FunctionComponent = () => {
 	const [sortedTickets, setSortedTickets] = useState<Ticket[]>([])
-	const tickets = useAppSelector((state) => state.tickets)
+	const tickets = useAppSelector((state) => state.tickets.tickets)
 	const router = useRouter()
 
 	useEffect(() => {

@@ -79,9 +79,10 @@ export async function updateTicket(id: string, changes: TicketChanges){
 	await updateDoc(ticketRef, changes)
 }
 
-export async function deleteTicket(id: string){
+export async function deleteTicket(id: string, deleteTime: number){
 	const ticketRef = doc(ticketsCollec, id)
 	await deleteDoc(ticketRef)
+	//Todo add history in db
 }
 
 

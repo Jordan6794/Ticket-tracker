@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../../hooks'
 import { deleteTicket, updateTicket } from '../../../lib/firebase.service'
 import { ticketsActions } from '../../../store/tickets'
 import { QUERY_CREATED_AT } from '../../../utils/consts'
+import { findChanges } from '../../../utils/ticketChanges.util'
 import { Priority, Project, Status, Ticket, TicketChanges, Type } from '../tickets.model'
 
 import styles from './UpdateTicketForm.module.css'
@@ -32,8 +33,9 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 
 	async function onSubmitForm(event: React.FormEvent) {
 		event.preventDefault()
-        const changes: TicketChanges = {...formInputs, last_updated_date: Timestamp.now().seconds}
+        const newTicket: TicketChanges = {...formInputs, last_updated_date: Timestamp.now().seconds}
 		setIsUpdating(true)
+		const changes = findChanges(newTicket, ticket)
 		//? update le last_updated_time in my fonctions rather than here ? Need be carefull to have same in both foncts
 		await updateTicket(ticket.id, changes)
 		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes }))
@@ -47,8 +49,9 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 	}
 
     async function handleDelete(){
-        await deleteTicket(ticket.id)
-        dispatch(ticketsActions.deleteTicket(ticket.id))
+		const deleteTime = Timestamp.now().seconds
+        await deleteTicket(ticket.id, deleteTime)
+        dispatch(ticketsActions.deleteTicket({id: ticket.id, deleteTime}))
         router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
     }
 

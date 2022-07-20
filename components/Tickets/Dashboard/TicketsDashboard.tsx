@@ -9,7 +9,7 @@ const PieChartComponentWithoutSSR = dynamic(import('./PieChartComponent'), { ssr
 import styles from './TicketDashboard.module.css'
 
 const TicketsDashboard: FunctionComponent = () => {
-	const tickets = useAppSelector((state) => state.tickets)
+	const tickets = useAppSelector((state) => state.tickets.tickets)
 
 	const ticketsCount = tickets.length
 	const projectsCount = Object.values(Project).length - 1
