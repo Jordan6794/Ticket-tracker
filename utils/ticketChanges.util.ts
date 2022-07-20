@@ -11,3 +11,11 @@ export function findChanges(newTicket: TicketChanges, oldTicket: Ticket){
     const changesObject = Object.fromEntries(changesArray) as TicketChanges
     return changesObject
 }
+
+// Return the changes without the date
+export function trimChanges(changes: TicketChanges){
+    const changeAsArray = Object.entries(changes)
+    const trimmedArray = changeAsArray.filter(([key, value]) => key !== 'last_updated_date')
+    const trimmedObject = Object.fromEntries(trimmedArray) as TicketChanges
+    return trimmedObject
+}

@@ -5,11 +5,11 @@ export interface History {
 	update_time: number
     change: HistoryChange
     ticket_id?: string
-    author?: string
 }
 
 export interface HistoryChange {
     change_type: ChangeType
+    author: string
     changes?: TicketChanges
 }
 

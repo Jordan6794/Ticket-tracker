@@ -1,0 +1,14 @@
+
+.historyTableDiv {
+    padding: 1em;
+    background-color: pink;
+    border-radius: 15px;
+}
+
+.historyItemDiv {
+    border-bottom: 1px solid grey;
+}
+
+.updateParagraph {
+    
+}

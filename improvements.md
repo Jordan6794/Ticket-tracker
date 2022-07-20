@@ -23,10 +23,12 @@ Later :
 - Team Ticket Logo ? At least better design/fonts if just text
 - Add local history for each ticket ?
 - Refactor a bit
+- Add filter (today, 1 week, 1 month) in history ?
 - Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken
 - check le server side render thingy
 - put auth redirectguard
 - Put a search on the topBar ?
+- Clean/split updates and other changes so I can clean my optional changes? in the type
 - Make small modal on success update of ticket
 - Check confirmations que firebase request succesfull avant de dispatch le local state
 

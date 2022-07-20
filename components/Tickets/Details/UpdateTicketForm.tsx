@@ -2,7 +2,7 @@ import { Timestamp } from 'firebase/firestore/lite'
 import { useRouter } from 'next/router'
 import { FunctionComponent, useState } from 'react'
 
-import { useAppDispatch } from '../../../hooks'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { deleteTicket, updateTicket } from '../../../lib/firebase.service'
 import { ticketsActions } from '../../../store/tickets'
 import { QUERY_CREATED_AT } from '../../../utils/consts'
@@ -23,6 +23,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 	const [isUpdating, setIsUpdating] = useState(false)
 	const dispatch = useAppDispatch()
     const router = useRouter()
+	const user = useAppSelector(state => state.auth)
 
 	function onInputChange(event: React.ChangeEvent<HTMLSelectElement>, inputName: string) {
 		setDidInputChange(true)
@@ -36,22 +37,25 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
         const newTicket: TicketChanges = {...formInputs, last_updated_date: Timestamp.now().seconds}
 		setIsUpdating(true)
 		const changes = findChanges(newTicket, ticket)
+		const author = user.username ?? 'anonymous'
 		//? update le last_updated_time in my fonctions rather than here ? Need be carefull to have same in both foncts
 		await updateTicket(ticket.id, changes)
-		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes }))
+		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes, author }))
 		setIsUpdating(false)
 	}
 
 	async function handleSolveTicket() {
 		const changes: TicketChanges = { status: Status.Resolved, last_updated_date: Timestamp.now().seconds }
+		const author = user.username ?? 'anonymous'
 		await updateTicket(ticket.id, changes)
-		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes }))
+		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes, author }))
 	}
 
     async function handleDelete(){
 		const deleteTime = Timestamp.now().seconds
+		const deleter = user.username ?? 'anonymous'
         await deleteTicket(ticket.id, deleteTime)
-        dispatch(ticketsActions.deleteTicket({id: ticket.id, deleteTime}))
+        dispatch(ticketsActions.deleteTicket({id: ticket.id, deleteTime, deleter}))
         router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
     }
 
