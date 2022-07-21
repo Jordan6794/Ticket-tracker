@@ -13,6 +13,7 @@ import ReplyForm from './ReplyForm'
 import UpdateTicketForm from './UpdateTicketForm'
 
 import styles from './TicketDetails.module.css'
+import { ChangeType, HistoryChange, HistoryElem } from '../History/history.model'
 
 const TicketDetails: FunctionComponent = () => {
 	const [ticket, setTicket] = useState<Ticket | null>(null)
@@ -45,11 +46,27 @@ const TicketDetails: FunctionComponent = () => {
 	}
 
 	async function submitReply(reply: string) {
-		const answer: Answer = { author: user.username ?? 'anonymous', date: Timestamp.now().seconds, post: reply }
-		if (ticketId && !Array.isArray(ticketId)) {
-			await addAnswerToTicket(ticketId, answer)
-			dispatch(ticketsActions.addReply({ id: ticketId, answer }))
+		if (!ticketId || Array.isArray(ticketId) || !ticket){
+			return
 		}
+
+		const author = user.username ?? 'anonymous'
+		const date = Timestamp.now().seconds
+		const ticket_title = ticket.title
+		const answer: Answer = { author, date, post: reply }
+		
+		const change: HistoryChange = {
+			change_type: ChangeType.Reply,
+			author
+		}
+		const historyElem: HistoryElem = {
+			ticket_title,
+			update_time: date,
+			change
+		}
+
+		await addAnswerToTicket(ticketId, answer, historyElem)
+		dispatch(ticketsActions.addReply({ id: ticketId, answer, historyElem }))
 	}
 
 	const answersDisplay = ticket?.answers.map((answer, i) => <AnswerDisplay key={i} answer={answer} />)

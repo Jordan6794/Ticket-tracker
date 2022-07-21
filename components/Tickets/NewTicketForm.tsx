@@ -10,6 +10,7 @@ import { QUERY_CREATED_AT } from '../../utils/consts'
 import { Priority, Status, Type, Ticket, Project } from './tickets.model'
 
 import styles from './NewTicketForm.module.css'
+import { ChangeType, HistoryChange, HistoryElem } from './History/history.model'
 
 const NewTicketForm: FunctionComponent = () => {
 	const [formInputs, setFormInputs] = useState({
@@ -52,9 +53,18 @@ const NewTicketForm: FunctionComponent = () => {
 			answers: [],
 		}
 
-		postTicket(newTicket)
+		const change: HistoryChange = {
+			change_type: ChangeType.New,
+			author: newTicket.author
+		}
+		const historyElem: HistoryElem = {
+			ticket_title: newTicket.title,
+			update_time: newTicket.last_updated_date,
+			change
+		}
+		postTicket(newTicket, historyElem)
 		//todo need to put un if que la post req success
-		dispatch(ticketsActions.add(newTicket))
+		dispatch(ticketsActions.add({ticket: newTicket, historyElem}))
 
 		router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
 	}

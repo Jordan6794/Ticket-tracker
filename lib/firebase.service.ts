@@ -18,6 +18,7 @@ import {
 	arrayUnion,
 	deleteDoc,
 } from 'firebase/firestore/lite'
+import { HistoryElem } from '../components/Tickets/History/history.model'
 
 import { Answer, Ticket, TicketChanges } from '../components/Tickets/tickets.model'
 import { ticketConverter } from '../utils/firestore-converters'
@@ -43,7 +44,10 @@ const db = getFirestore(app)
 const auth = getAuth(app)
 // const analytics = getAnalytics(app);
 
+const historyDocId = "N4mNDv3i9zTrBp1OelxB"
+
 const ticketsCollec = collection(db, 'tickets').withConverter(ticketConverter)
+const historyDoc = doc(collection(db, "history"), historyDocId)
 
 //=== Tickets functions
 //? name fromDatabase redondant ici ou good ?
@@ -62,27 +66,38 @@ export async function getTicket(id: string){
 	}
 }
 
-export async function postTicket(ticket: Ticket) {
+export async function postTicket(ticket: Ticket, historyElem: HistoryElem) {
 	await setDoc(doc(ticketsCollec, ticket.id), ticket)
+	await updateDoc(historyDoc, {
+		history: arrayUnion(historyElem)
+	})
 }
 
-export async function addAnswerToTicket(id: string, answer: Answer){
+export async function addAnswerToTicket(id: string, answer: Answer, historyElem: HistoryElem){
 	const ticketRef = doc(ticketsCollec, id)
 	await updateDoc(ticketRef, {
 		answers: arrayUnion(answer),
 		last_updated_date: answer.date
 	})
+	await updateDoc(historyDoc, {
+		history: arrayUnion(historyElem)
+	})
 }
 
-export async function updateTicket(id: string, changes: TicketChanges){
+export async function updateTicket(id: string, changes: TicketChanges, historyElem: HistoryElem){
 	const ticketRef = doc(ticketsCollec, id)
 	await updateDoc(ticketRef, changes)
+	await updateDoc(historyDoc, {
+		history: arrayUnion(historyElem)
+	})
 }
 
-export async function deleteTicket(id: string, deleteTime: number){
+export async function deleteTicket(id: string, historyElem: HistoryElem){
 	const ticketRef = doc(ticketsCollec, id)
 	await deleteDoc(ticketRef)
-	//Todo add history in db
+	await updateDoc(historyDoc, {
+		history: arrayUnion(historyElem)
+	})
 }
 
 

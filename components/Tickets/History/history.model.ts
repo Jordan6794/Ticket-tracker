@@ -1,6 +1,6 @@
 import { TicketChanges } from "../tickets.model"
 
-export interface History {
+export interface HistoryElem {
     ticket_title: string
 	update_time: number
     change: HistoryChange

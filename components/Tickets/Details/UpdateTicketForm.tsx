@@ -7,6 +7,7 @@ import { deleteTicket, updateTicket } from '../../../lib/firebase.service'
 import { ticketsActions } from '../../../store/tickets'
 import { QUERY_CREATED_AT } from '../../../utils/consts'
 import { findChanges } from '../../../utils/ticketChanges.util'
+import { ChangeType, HistoryChange, HistoryElem } from '../History/history.model'
 import { Priority, Project, Status, Ticket, TicketChanges, Type } from '../tickets.model'
 
 import styles from './UpdateTicketForm.module.css'
@@ -35,27 +36,52 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 	async function onSubmitForm(event: React.FormEvent) {
 		event.preventDefault()
         const newTicket: TicketChanges = {...formInputs, last_updated_date: Timestamp.now().seconds}
+		await handleUpdateTicket(newTicket)
+	}
+
+	async function handleSolveTicket(event: React.FormEvent) {
+		event.preventDefault()
+		setFormInputs(prevInputs => ({...prevInputs, status: Status.Resolved}))
+		const changes: TicketChanges = { status: Status.Resolved, last_updated_date: Timestamp.now().seconds }
+		handleUpdateTicket(changes)
+	}
+
+	async function handleUpdateTicket(newTicket: TicketChanges){
 		setIsUpdating(true)
-		const changes = findChanges(newTicket, ticket)
+		const ticketChanges = findChanges(newTicket, ticket)
 		const author = user.username ?? 'anonymous'
-		//? update le last_updated_time in my fonctions rather than here ? Need be carefull to have same in both foncts
-		await updateTicket(ticket.id, changes)
-		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes, author }))
+		const ticket_title = ticket.title
+
+		const historyChange: HistoryChange = {
+			change_type: ChangeType.Update,
+			changes: ticketChanges,
+			author
+		}
+		const historyElem: HistoryElem = {
+			ticket_title,
+			update_time: ticketChanges.last_updated_date,
+			change: historyChange
+		}
+		await updateTicket(ticket.id, ticketChanges, historyElem)
+		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes: ticketChanges, historyElem }))
 		setIsUpdating(false)
 	}
 
-	async function handleSolveTicket() {
-		const changes: TicketChanges = { status: Status.Resolved, last_updated_date: Timestamp.now().seconds }
-		const author = user.username ?? 'anonymous'
-		await updateTicket(ticket.id, changes)
-		dispatch(ticketsActions.updateTicket({ id: ticket.id, changes, author }))
-	}
-
     async function handleDelete(){
+		const ticket_title = ticket.title
 		const deleteTime = Timestamp.now().seconds
-		const deleter = user.username ?? 'anonymous'
-        await deleteTicket(ticket.id, deleteTime)
-        dispatch(ticketsActions.deleteTicket({id: ticket.id, deleteTime, deleter}))
+		const change: HistoryChange = {
+			change_type: ChangeType.Delete,
+			author: user.username ?? 'anonymous'
+		}
+		const historyElem: HistoryElem = {
+			ticket_title,
+			update_time: deleteTime,
+			change
+		}
+
+        await deleteTicket(ticket.id, historyElem)
+        dispatch(ticketsActions.deleteTicket({id: ticket.id, historyElem}))
         router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
     }
 
@@ -103,7 +129,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 				</button>
 			</form>
 			{ticket.status !== Status.Resolved && (
-				<button type="button" className={`btn btn-primary ${styles.btn} ${styles.resolveBtn}`} onClick={handleSolveTicket}>
+				<button className={`btn btn-primary ${styles.btn} ${styles.resolveBtn}`} type="submit" onClick={handleSolveTicket}>
 					Resolve
 				</button>
 			)}

@@ -3,11 +3,11 @@ import { getTimeAgo } from '../../../utils/date.util'
 import { trimChanges } from '../../../utils/ticketChanges.util'
 import { TicketChanges } from '../tickets.model'
 
-import { ChangeType, History } from './history.model'
+import { ChangeType, HistoryElem } from './history.model'
 
 import styles from './History.module.css'
 
-const TicketsHistory: FunctionComponent<{historyElement: History}> = ({historyElement}) => {
+const TicketsHistory: FunctionComponent<{historyElement: HistoryElem}> = ({historyElement}) => {
 
 	let actionText = ''
 	switch (historyElement.change.change_type) {
