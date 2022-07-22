@@ -1,16 +1,15 @@
 import { FunctionComponent } from 'react'
-import DropdownMenu from '../../Dropdown/dropdownMenu'
-import DropdownToggler from '../../Dropdown/dropdownToggler'
+import DropdownMenu from './Dropdown/dropdownMenu'
+import DropdownToggler from './Dropdown/dropdownToggler'
 
-// import { ReactComponent as CaretIcone} from '../../icons.caret.svg'
 import styles from './Filter.module.css'
 
-const Filter: FunctionComponent = () => {
+const Filter: FunctionComponent<{isOpenTicketsFeed: boolean}> = ({isOpenTicketsFeed}) => {
 
 	return (
 		<div className={styles.filterDiv}>
 			<p>Sort by : </p>
-			<DropdownToggler>
+			<DropdownToggler isOpenTicketsFeed={isOpenTicketsFeed}>
 				<DropdownMenu />
 			</DropdownToggler>
 		</div>

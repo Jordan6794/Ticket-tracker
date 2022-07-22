@@ -51,6 +51,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 		const ticketChanges = findChanges(newTicket, ticket)
 		const author = user.username ?? 'anonymous'
 		const ticket_title = ticket.title
+		const ticket_id = ticket.id
 
 		const historyChange: HistoryChange = {
 			change_type: ChangeType.Update,
@@ -59,6 +60,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 		}
 		const historyElem: HistoryElem = {
 			ticket_title,
+			ticket_id,
 			update_time: ticketChanges.last_updated_date,
 			change: historyChange
 		}
@@ -69,6 +71,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 
     async function handleDelete(){
 		const ticket_title = ticket.title
+		const ticket_id = ticket.id
 		const deleteTime = Timestamp.now().seconds
 		const change: HistoryChange = {
 			change_type: ChangeType.Delete,
@@ -76,6 +79,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 		}
 		const historyElem: HistoryElem = {
 			ticket_title,
+			ticket_id,
 			update_time: deleteTime,
 			change
 		}

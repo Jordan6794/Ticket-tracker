@@ -53,6 +53,7 @@ const TicketDetails: FunctionComponent = () => {
 		const author = user.username ?? 'anonymous'
 		const date = Timestamp.now().seconds
 		const ticket_title = ticket.title
+		const ticket_id = ticket.id
 		const answer: Answer = { author, date, post: reply }
 		
 		const change: HistoryChange = {
@@ -61,6 +62,7 @@ const TicketDetails: FunctionComponent = () => {
 		}
 		const historyElem: HistoryElem = {
 			ticket_title,
+			ticket_id,
 			update_time: date,
 			change
 		}

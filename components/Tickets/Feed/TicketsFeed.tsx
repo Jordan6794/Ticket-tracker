@@ -8,25 +8,27 @@ import { sortTickets } from '../../../utils/sortTickets.util'
 import Filter from '../Filter/Filter'
 
 import TicketPreview from './TicketPreview'
-import { Ticket } from './../tickets.model'
+import { Status, Ticket } from './../tickets.model'
 
 import styles from './TicketsFeed.module.css'
 
-const TicketsFeed: FunctionComponent = () => {
+const TicketsFeed: FunctionComponent<{isOpenTicketsFeed: boolean}> = ({isOpenTicketsFeed}) => {
 	const [sortedTickets, setSortedTickets] = useState<Ticket[]>([])
 	const tickets = useAppSelector((state) => state.tickets.tickets)
 	const router = useRouter()
-
+	
 	useEffect(() => {
-		if (!router.isReady) return
-		if (tickets.length > 0) {
-			if (router.query.orderBy && !Array.isArray(router.query.orderBy)) {
-				setSortedTickets(sortTickets(tickets, router.query.orderBy))
-			} else {
-				setSortedTickets(tickets)
-			}
+		if (!router.isReady || tickets.length === 0) return
+		
+		const openTickets = tickets.filter(ticket => (ticket.status === Status.Open || ticket.status === Status.Pending))
+		const closedTickets = tickets.filter(ticket => ticket.status === Status.Closed || ticket.status === Status.Resolved)
+		const feedTickets = isOpenTicketsFeed ? openTickets : closedTickets
+		if (router.query.orderBy && !Array.isArray(router.query.orderBy)) {
+			setSortedTickets(sortTickets(feedTickets, router.query.orderBy))
+		} else {
+			setSortedTickets(feedTickets)
 		}
-	}, [tickets, router.query.orderBy, router.isReady])
+	}, [tickets, isOpenTicketsFeed, router.query.orderBy, router.isReady])
 
 	const ticketsDisplay = sortedTickets.map((ticketItem) => <TicketPreview key={ticketItem.id} ticket={ticketItem} />)
 
@@ -35,7 +37,9 @@ const TicketsFeed: FunctionComponent = () => {
 				<div className={styles.topBarBackground}>
                     <div className='container'>
                         <div className={styles.topBar}>
-                            <Filter />
+                            {isOpenTicketsFeed ? 
+							<Filter isOpenTicketsFeed={true} /> :
+							<Filter isOpenTicketsFeed={false} />}
                             <Link href="/tickets/new">
                                 <button type="button" className={`btn btn-primary btn-small ${styles.newTicketBtn}`}>
                                     New Ticket

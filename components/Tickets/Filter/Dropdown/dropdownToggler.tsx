@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks'
+import { useAppDispatch, useAppSelector } from '../../../../hooks'
 
-import { sortByActions } from '../../store/sortBy'
-import { displaySortBy } from '../../utils/sortDisplay'
-import Caret from '../../public/caret.svg'
+import { sortByActions } from '../../../../store/sortBy'
+import { displaySortBy } from '../../../../utils/sortDisplay'
+import Caret from '../../../../public/caret.svg'
 
 import styles from './dropdown.module.css'
-import { dropdownActions } from '../../store/dropdown'
+import { dropdownActions } from '../../../../store/dropdown'
 
-const DropdownToggler: FunctionComponent<{ children?: JSX.Element[] | JSX.Element }> = (props) => {
+const DropdownToggler: FunctionComponent<{ isOpenTicketsFeed: boolean, children?: JSX.Element[] | JSX.Element }> = (props) => {
 	const [isMounted, setIsMounted] = useState(false)
 	const sortBy = useAppSelector(state => state.sortBy)
 	const open = useAppSelector(state => state.dropdown)
@@ -20,7 +20,8 @@ const DropdownToggler: FunctionComponent<{ children?: JSX.Element[] | JSX.Elemen
 		if (isMounted) {
 			const currentQuery = router.query.orderBy
 			if (sortBy !== currentQuery) {
-				router.push(`/tickets/feed?orderBy=${sortBy}`)
+				const feedUrl = props.isOpenTicketsFeed ? '/tickets/feedopen' : '/tickets/feedclosed'
+				router.push(`${feedUrl}?orderBy=${sortBy}`)
 			}
 		} else {
 			setIsMounted(true)

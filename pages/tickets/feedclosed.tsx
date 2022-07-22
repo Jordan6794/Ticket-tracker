@@ -8,7 +8,7 @@ const Tickets: NextPage = () => {
 	return (
 		<div className='wrapper'>
 			<SideNav />
-			<TicketsFeed />
+			<TicketsFeed isOpenTicketsFeed={false} />
 		</div>
 	)
 }

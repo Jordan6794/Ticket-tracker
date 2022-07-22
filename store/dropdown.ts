@@ -9,6 +9,9 @@ const dropdownSlice = createSlice({
     reducers: {
         toggle(state){
             return !state
+        },
+        close(state){
+            return false
         }
     }
 })

@@ -21,7 +21,7 @@ import {
 import { HistoryElem } from '../components/Tickets/History/history.model'
 
 import { Answer, Ticket, TicketChanges } from '../components/Tickets/tickets.model'
-import { ticketConverter } from '../utils/firestore-converters'
+import { historyConverter, ticketConverter } from '../utils/firestore-converters'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -47,14 +47,22 @@ const auth = getAuth(app)
 const historyDocId = "N4mNDv3i9zTrBp1OelxB"
 
 const ticketsCollec = collection(db, 'tickets').withConverter(ticketConverter)
-const historyDoc = doc(collection(db, "history"), historyDocId)
+const historyDoc = doc(collection(db, "history"), historyDocId).withConverter(historyConverter)
 
 //=== Tickets functions
-//? name fromDatabase redondant ici ou good ?
 export async function getTicketsFromDatabase() {	
 	const querySnapshot = await getDocs(ticketsCollec)
 	const result = querySnapshot.docs.map((doc) => doc.data())
 	return result
+}
+
+export async function getHistoryFromDatabase(){
+	const docSnap = await getDoc(historyDoc)
+	if(docSnap.exists()){
+		return docSnap.data()
+	} else {
+		return null
+	}
 }
 
 export async function getTicket(id: string){
@@ -67,37 +75,41 @@ export async function getTicket(id: string){
 }
 
 export async function postTicket(ticket: Ticket, historyElem: HistoryElem) {
-	await setDoc(doc(ticketsCollec, ticket.id), ticket)
-	await updateDoc(historyDoc, {
+	const writeDoc =  setDoc(doc(ticketsCollec, ticket.id), ticket)
+	const updateHistory = updateDoc(historyDoc, {
 		history: arrayUnion(historyElem)
 	})
+	await Promise.all([writeDoc, updateHistory])
 }
 
 export async function addAnswerToTicket(id: string, answer: Answer, historyElem: HistoryElem){
 	const ticketRef = doc(ticketsCollec, id)
-	await updateDoc(ticketRef, {
+	const addAnswer = updateDoc(ticketRef, {
 		answers: arrayUnion(answer),
 		last_updated_date: answer.date
 	})
-	await updateDoc(historyDoc, {
+	const updateHistory = updateDoc(historyDoc, {
 		history: arrayUnion(historyElem)
 	})
+	await Promise.all([addAnswer, updateHistory])
 }
 
 export async function updateTicket(id: string, changes: TicketChanges, historyElem: HistoryElem){
 	const ticketRef = doc(ticketsCollec, id)
-	await updateDoc(ticketRef, changes)
-	await updateDoc(historyDoc, {
+	const updateTicketPromise= updateDoc(ticketRef, changes)
+	const updateHistory = updateDoc(historyDoc, {
 		history: arrayUnion(historyElem)
 	})
+	await Promise.all([updateTicketPromise, updateHistory])
 }
 
 export async function deleteTicket(id: string, historyElem: HistoryElem){
 	const ticketRef = doc(ticketsCollec, id)
-	await deleteDoc(ticketRef)
-	await updateDoc(historyDoc, {
+	const deleteTicket =  deleteDoc(ticketRef)
+	const updateHistory = updateDoc(historyDoc, {
 		history: arrayUnion(historyElem)
 	})
+	await Promise.all([deleteTicket, updateHistory])
 }
 
 

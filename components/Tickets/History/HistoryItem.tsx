@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { FunctionComponent } from 'react'
 import { getTimeAgo } from '../../../utils/date.util'
 import { trimChanges } from '../../../utils/ticketChanges.util'
@@ -7,8 +8,7 @@ import { ChangeType, HistoryElem } from './history.model'
 
 import styles from './History.module.css'
 
-const TicketsHistory: FunctionComponent<{historyElement: HistoryElem}> = ({historyElement}) => {
-
+const TicketsHistory: FunctionComponent<{ historyElement: HistoryElem }> = ({ historyElement }) => {
 	let actionText = ''
 	switch (historyElement.change.change_type) {
 		case ChangeType.New:
@@ -25,28 +25,38 @@ const TicketsHistory: FunctionComponent<{historyElement: HistoryElem}> = ({histo
 			break
 	}
 
-    let updates: null | string[] = null
-    if(historyElement.change.change_type === ChangeType.Update && historyElement.change.changes){
-        const trimmedChanges = trimChanges(historyElement.change.changes)
-        updates = Object.keys(trimmedChanges).map((key) =>{
-            const typedKey = key as keyof TicketChanges
-            //capitalizing the first letter as it will be in the begining of a sentence
-            const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1)
-            return `${capitalizedKey} set to ${trimmedChanges[typedKey]}`
-        })
-    }
-    
+	let updates: null | string[] = null
+	if (historyElement.change.change_type === ChangeType.Update && historyElement.change.changes) {
+		const trimmedChanges = trimChanges(historyElement.change.changes)
+		updates = Object.keys(trimmedChanges).map((key) => {
+			const typedKey = key as keyof TicketChanges
+			//capitalizing the first letter as it will be in the begining of a sentence
+			const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1)
+			return `${capitalizedKey} set to ${trimmedChanges[typedKey]}`
+		})
+	}
 
-	const timeAgo = getTimeAgo(new Date(historyElement.update_time * 1000), true)
+	const timeAgo = getTimeAgo(new Date(historyElement.update_time * 1000), false)
+
+	const rename = (<p>
+		{historyElement.change.author} {actionText} the ticket {historyElement.ticket_title} {timeAgo}
+	</p>)
+	
 	return (
 		<div className={styles.historyItemDiv}>
-			<p>
-				{historyElement.change.author} {actionText} the ticket {historyElement.ticket_title} {timeAgo}
-			</p>
-            {updates && <>
-				{updates.map((update, index) => <p className= {styles.updateParagraph} key={index}>{update}</p>)}
-			</>}
-		</div>
+				{historyElement.change.change_type !== ChangeType.Delete ? <Link href={`/tickets/${historyElement.ticket_id}`}>
+					{rename}
+				</Link> : rename}
+				{updates && (
+					<>
+						{updates.map((update, index) => (
+							<p className={styles.updateParagraph} key={index}>
+								{update}
+							</p>
+						))}
+					</>
+				)}
+			</div>
 	)
 }
 

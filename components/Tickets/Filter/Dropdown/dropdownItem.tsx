@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react'
 
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { sortByActions } from '../../store/sortBy'
-import { dropdownActions } from '../../store/dropdown'
-import { displaySortBy } from '../../utils/sortDisplay'
-import Checkmark from '../../public/check-mark.svg'
+import { useAppDispatch, useAppSelector } from '../../../../hooks'
+import { sortByActions } from '../../../../store/sortBy'
+import { dropdownActions } from '../../../../store/dropdown'
+import { displaySortBy } from '../../../../utils/sortDisplay'
+import Checkmark from '../../../../public/check-mark.svg'
 
 import styles from './dropdown.module.css'
 

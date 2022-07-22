@@ -1,13 +1,7 @@
-- Do History
-: Display history in history part
-: add link to the ticket on history part
-: Update history in DB (and load on app load obv)
+- Do History Display
 - Nav parts: Dashboard/stats , All tickets, (new ticket?), archived/closed tickets, history 
-- Copy the ticket page for closed/resolved tickets
 - Do home/login page
 - Fix date ?
-- Make clicking outside of dropdown close dropdown (filter tickets)
-- Put mes awaits in firebase foncts in await Promise.all
 
 Design:
 - Finish sideNav : improve top of leftNav, just remove margin top? + make responsivity (expand on hover on smaller and hanburger on mobile)

@@ -18,6 +18,7 @@ const TicketsDashboard: FunctionComponent = () => {
 	const resolvedTicketsCount = tickets.filter((ticket) => ticket.status === Status.Resolved).length
 	const closedTicketsCount = tickets.filter((ticket) => ticket.status === Status.Closed).length
 	const pendingTicketsCount = tickets.filter((ticket) => ticket.status === Status.Pending).length
+	const archivedTicketsCount = closedTicketsCount + resolvedTicketsCount
 
 	const prioLowTicketsCount = tickets.filter((ticket) => ticket.priority === Priority.Low).length
 	const prioMediumTicketsCount = tickets.filter((ticket) => ticket.priority === Priority.Medium).length
@@ -78,7 +79,7 @@ const TicketsDashboard: FunctionComponent = () => {
 						<p>Open tickets : {openTicketsCount}</p>
 					</div>
 					<div className={`${styles.card} ${styles.color4}`}>
-						<p>Resolved tickets : {resolvedTicketsCount}</p>
+						<p>Archived tickets : {archivedTicketsCount}</p>
 					</div>
 				</div>
 

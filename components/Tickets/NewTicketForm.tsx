@@ -59,6 +59,7 @@ const NewTicketForm: FunctionComponent = () => {
 		}
 		const historyElem: HistoryElem = {
 			ticket_title: newTicket.title,
+			ticket_id: newTicket.id,
 			update_time: newTicket.last_updated_date,
 			change
 		}

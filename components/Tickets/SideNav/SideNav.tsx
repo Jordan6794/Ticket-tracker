@@ -27,11 +27,20 @@ const SideNav: FunctionComponent = () => {
 				</Link>
 
 				<div className={styles.devider}></div>
-				<Link href={`/tickets/feed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>
-					<li className={`${styles.navItem} ${router.pathname === '/tickets/feed' ? `${styles.active}` : ''}`}>
+				<Link href={`/tickets/feedopen?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>
+					<li className={`${styles.navItem} ${router.pathname === '/tickets/feedopen' ? `${styles.active}` : ''}`}>
 						<div className={`${styles.navElement}`}>
 							<Tickets className={styles.navIcon} />
-							<span className={styles.navText}>Tickets</span>
+							<span className={styles.navText}>Open Tickets</span>
+						</div>
+					</li>
+				</Link>
+				<div className={styles.devider}></div>
+				<Link href={`/tickets/feedclosed?${QUERY_ORDER_BY}=${QUERY_CREATED_AT}`}>
+					<li className={`${styles.navItem} ${router.pathname === '/tickets/feedclosed' ? `${styles.active}` : ''}`}>
+						<div className={`${styles.navElement}`}>
+							<Tickets className={styles.navIcon} />
+							<span className={styles.navText}>Archived Tickets</span>
 						</div>
 					</li>
 				</Link>

@@ -1,9 +1,8 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, WithFieldValue } from "firebase/firestore/lite";
+import { HistoryDocumentInDatabase } from "../components/Tickets/History/history.model";
 import { Ticket } from "../components/Tickets/tickets.model";
 
 
-//? Useless to convert numbers/Timestamp because updateDoc does not call covnerter, which makes everything crumble
-//? => So we put Timestamp in numbers in DB too and drop conversions
 export const ticketConverter: FirestoreDataConverter<Ticket> = {
     toFirestore(ticket: WithFieldValue<Ticket>): DocumentData{
         return ticket
@@ -12,5 +11,16 @@ export const ticketConverter: FirestoreDataConverter<Ticket> = {
     fromFirestore(snapshot: QueryDocumentSnapshot): Ticket{
         const data = snapshot.data()!
 		return data as Ticket
+    }
+}
+
+export const historyConverter: FirestoreDataConverter<HistoryDocumentInDatabase> = {
+    toFirestore(history: WithFieldValue<HistoryDocumentInDatabase>): DocumentData{
+        return history
+    },
+
+    fromFirestore(snapshot: QueryDocumentSnapshot): HistoryDocumentInDatabase{
+        const data = snapshot.data()!
+        return data as HistoryDocumentInDatabase
     }
 }

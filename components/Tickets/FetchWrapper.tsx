@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect } from "react";
 
 import { useAppDispatch } from "../../hooks";
-import { getTicketsFromDatabase } from "../../lib/firebase.service";
+import { getHistoryFromDatabase, getTicketsFromDatabase } from "../../lib/firebase.service";
 import { ticketsActions } from "../../store/tickets";
 
 const FetchWrapper: FunctionComponent<{ children: JSX.Element[] | JSX.Element }> = (props) =>{
@@ -12,7 +12,15 @@ const FetchWrapper: FunctionComponent<{ children: JSX.Element[] | JSX.Element }>
 			const tickets = await getTicketsFromDatabase()
 			dispatch(ticketsActions.setTickets(tickets))
 		}
+
+		const fetchHistory = async () => {
+			const history = await getHistoryFromDatabase()
+			if(history){
+				dispatch(ticketsActions.setHistory(history.history))
+			}
+		}
 		fetchTickets()
+		fetchHistory()
 	}, [dispatch])
     
     return <>{props.children}</>
