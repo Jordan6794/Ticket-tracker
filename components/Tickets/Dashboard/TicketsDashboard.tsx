@@ -64,10 +64,14 @@ const TicketsDashboard: FunctionComponent = () => {
 
 	return (
 		<div className="content-div">
-			<div className={styles.centerContainer}>
-				<div className={`${styles.responsiveGrid} ${styles.titleDiv}`}>
-					<h3>Dashboard</h3>
+			<div className='top-bar-background'>
+				<div className={styles.centerContainer}>
+					<div className={`${styles.responsiveGrid} ${styles.titleDiv}`}>
+						<h3 className='page-title'>Dashboard</h3>
+					</div>
 				</div>
+			</div>
+			<div className={styles.centerContainer}>
 				<div className={`${styles.responsiveGrid} ${styles.topStatsDiv}`}>
 					<div className={`${styles.card} ${styles.color1}`}>
 						<p>Number of tickets : {ticketsCount}</p>
@@ -83,24 +87,24 @@ const TicketsDashboard: FunctionComponent = () => {
 					</div>
 				</div>
 
-				<div className={`${styles.responsiveGrid} ${styles.chartsTitle}`}>
+				{/* <div className={`${styles.responsiveGrid} ${styles.chartsTitle}`}>
 					<h3>Tickets by :</h3>
-				</div>
+				</div> */}
 				<div className={`${styles.responsiveGrid} ${styles.chartsDiv}`}>
 					<div className={styles.pieDiv}>
-						<h3 className={styles.pieTitle}>Status</h3>
+						<h3 className={styles.pieTitle}>Tickets Status</h3>
 						<PieChartComponentWithoutSSR data={pieData1} colors={pieColors} />
 					</div>
 					<div className={styles.pieDiv}>
-						<h3 className={styles.pieTitle}>Priority</h3>
+						<h3 className={styles.pieTitle}>Tickets Priority</h3>
 						<PieChartComponentWithoutSSR data={pieData2} colors={pieColors} />
 					</div>
 					<div className={styles.pieDiv}>
-						<h3 className={styles.pieTitle}>Type</h3>
+						<h3 className={styles.pieTitle}>Tickets Type</h3>
 						<PieChartComponentWithoutSSR data={pieData3} colors={pieColors} />
 					</div>
 					<div className={styles.pieDiv}>
-						<h3 className={styles.pieTitle}>Project</h3>
+						<h3 className={styles.pieTitle}>Tickets by Project</h3>
 						<PieChartComponentWithoutSSR data={pieData4} colors={pieColors} />
 					</div>
 				</div>

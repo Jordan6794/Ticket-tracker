@@ -34,9 +34,15 @@ const TicketsFeed: FunctionComponent<{isOpenTicketsFeed: boolean}> = ({isOpenTic
 
 	return (
 		<div className='content-div'>
-				<div className={styles.topBarBackground}>
+			<div className='top-bar-background'>
+                <div className='container'>
+                    <div className='top-bar'>
+                        <h3 className='page-title'>{isOpenTicketsFeed ? 'Open' : 'Archived'} Tickets</h3>
+                    </div>
+                </div>
+            </div>
                     <div className='container'>
-                        <div className={styles.topBar}>
+                        <div className={styles.filterBar}>
                             {isOpenTicketsFeed ? 
 							<Filter isOpenTicketsFeed={true} /> :
 							<Filter isOpenTicketsFeed={false} />}
@@ -47,7 +53,6 @@ const TicketsFeed: FunctionComponent<{isOpenTicketsFeed: boolean}> = ({isOpenTic
                             </Link>
                         </div>
                     </div>
-				</div>
 			<div className='container'>
 				{ticketsDisplay}
 			</div>

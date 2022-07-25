@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react'
 import { QUERY_CREATED_AT, QUERY_ORDER_BY } from '../../../utils/consts'
 
 import Dashboard from '../../../public/leaderboardF.svg'
-import Tickets from '../../../public/storage.svg'
+import Tickets from '../../../public/list.svg'
 import HistoryLogo from '../../../public/history.svg'
 
 import styles from './SideNav.module.css'

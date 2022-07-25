@@ -30,6 +30,23 @@ ul {
   padding: 0;
 }
 
+/* ===Title bar===== */
+.top-bar-background {
+  background-color: #EBEFF3;
+  border-bottom: 1px solid rgba(120,130,140,.13);
+  margin-bottom: 3em;
+}
+.top-bar{
+  padding: 0.7em 0;
+}
+
+.title-margin {
+  margin: 1.5em 0 2.5em;
+}
+.page-title {
+  font-size: 1.15rem;
+}
+
 /* ========
 Buttons */
 .btn {

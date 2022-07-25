@@ -15,9 +15,14 @@ const TicketsHistory: FunctionComponent = () => {
 
     return(
         <div className="content-div">
+            <div className='top-bar-background'>
+                <div className='container'>
+                    <div className='top-bar'>
+                        <h3 className='page-title'>History</h3>
+                    </div>
+                </div>
+            </div>
              <div className='container'>
-                <h3>History works</h3>
-
                 <div className={styles.historyTableDiv}>
                     {historyItems}
                 </div>

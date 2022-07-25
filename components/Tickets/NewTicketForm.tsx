@@ -72,6 +72,13 @@ const NewTicketForm: FunctionComponent = () => {
 
 	return (
 		<div className="content-div">
+			<div className='top-bar-background no-margin'>
+                <div className='container'>
+                    <div className='top-bar'>
+                        <h3 className='page-title'>New Ticket</h3>
+                    </div>
+                </div>
+            </div>
 			<div className="container white-container">
 				<form className={styles.form}>
 					<h3 className={styles.pageTitle}>New Ticket</h3>
