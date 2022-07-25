@@ -1,7 +1,11 @@
-- Do History Display
+- Feedback History display
 - Nav parts: Dashboard/stats , All tickets, (new ticket?), archived/closed tickets, history 
 - Do home/login page
-- Fix date ?
+- Change colors of dashboard
+- Add un title pour les pages quelque part (soit dans la Nav soit dans each page) : probably juste dans la page pour ticket feed on top : All Tickets
+: Need to see how I put le filtre toppart du coup
+- Change Tickets icon in nav
+
 
 Design:
 - Finish sideNav : improve top of leftNav, just remove margin top? + make responsivity (expand on hover on smaller and hanburger on mobile)
@@ -9,9 +13,6 @@ Design:
 - Redo ticket feed design : smaller height et less space in between (need like 10ish tickets par page izi) + put project/type in display
 + make un btn see more/edit in the design too, can not only be hover on title text
 - Redesign new ticket (can check design for update ticket)
-- Add un title pour les pages quelque part (soit dans la Nav soit dans each page) : probably juste dans la page pour ticket feed on top : All Tickets
-: Need to see how I put le filtre toppart du coup
-- Change Tickets icon in nav
 
 Later :
 - Team/assign people to tickets

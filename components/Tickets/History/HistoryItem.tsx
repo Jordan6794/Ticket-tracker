@@ -32,31 +32,40 @@ const TicketsHistory: FunctionComponent<{ historyElement: HistoryElem }> = ({ hi
 			const typedKey = key as keyof TicketChanges
 			//capitalizing the first letter as it will be in the begining of a sentence
 			const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1)
-			return `${capitalizedKey} set to ${trimmedChanges[typedKey]}`
+			return `• ${capitalizedKey} set to ${trimmedChanges[typedKey]}`
 		})
 	}
 
 	const timeAgo = getTimeAgo(new Date(historyElement.update_time * 1000), false)
 
-	const rename = (<p>
-		{historyElement.change.author} {actionText} the ticket {historyElement.ticket_title} {timeAgo}
-	</p>)
-	
+	const historyLineDisplay = (
+		<>
+			<p className={styles.historyItemTitle}>
+				Ticket {historyElement.ticket_title}
+			</p>
+			<p>
+				{historyElement.change.author} {actionText} the ticket {historyElement.ticket_title} - {timeAgo}
+			</p>
+		</>
+	)
+
 	return (
 		<div className={styles.historyItemDiv}>
-				{historyElement.change.change_type !== ChangeType.Delete ? <Link href={`/tickets/${historyElement.ticket_id}`}>
-					{rename}
-				</Link> : rename}
-				{updates && (
-					<>
-						{updates.map((update, index) => (
-							<p className={styles.updateParagraph} key={index}>
-								{update}
-							</p>
-						))}
-					</>
-				)}
-			</div>
+			{historyElement.change.change_type !== ChangeType.Delete ? (
+				<Link href={`/tickets/${historyElement.ticket_id}`}><div className={styles.historyLink}>{historyLineDisplay}</div></Link>
+			) : (
+				historyLineDisplay
+			)}
+			{updates && (
+				<>
+					{updates.map((update, index) => (
+						<p className={styles.updateParagraph} key={index}>
+							{update}
+						</p>
+					))}
+				</>
+			)}
+		</div>
 	)
 }
 

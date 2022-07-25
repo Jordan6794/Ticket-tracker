@@ -44,7 +44,7 @@ const MONTH_NAMES = [
     const yesterday = new Date(today.getTime() - DAY_IN_MS);
     const seconds = Math.round((today.getTime() - dateParam.getTime()) / 1000);
     const minutes = Math.round(seconds / 60);
-    const days = Math.round(minutes / 3600 )
+    const days = Math.round(minutes / 1440 )
     const isToday = today.toDateString() === dateParam.toDateString();
     const isYesterday = yesterday.toDateString() === dateParam.toDateString();
     const isThisYear = today.getFullYear() === dateParam.getFullYear();

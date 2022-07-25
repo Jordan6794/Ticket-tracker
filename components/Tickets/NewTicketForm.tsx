@@ -32,7 +32,7 @@ const NewTicketForm: FunctionComponent = () => {
 	}
 
 	function onCancel() {
-		router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
+		router.push(`/tickets/feedopen?orderBy=${QUERY_CREATED_AT}`)
 	}
 
 	function onSubmitForm(event: React.FormEvent) {
@@ -67,7 +67,7 @@ const NewTicketForm: FunctionComponent = () => {
 		//todo need to put un if que la post req success
 		dispatch(ticketsActions.add({ticket: newTicket, historyElem}))
 
-		router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
+		router.push(`/tickets/feedopen?orderBy=${QUERY_CREATED_AT}`)
 	}
 
 	return (

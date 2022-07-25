@@ -8,7 +8,10 @@ import styles from "./History.module.css"
 const TicketsHistory: FunctionComponent = () => {
     const history = useAppSelector(state => state.tickets.history)
 
-    const historyItems = history.map((element, index) => <HistoryItem key={index} historyElement={element} />)
+    // reversing so that we have the latest first
+    const reversedHistory = history.slice().reverse()
+
+    const historyItems = reversedHistory.map((element, index) => <HistoryItem key={index} historyElement={element} />)
 
     return(
         <div className="content-div">

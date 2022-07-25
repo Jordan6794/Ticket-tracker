@@ -1,14 +1,24 @@
 
 .historyTableDiv {
-    padding: 1em;
-    background-color: pink;
+    padding: 2em;
+    background-color: #FFFFFF;
     border-radius: 15px;
 }
 
 .historyItemDiv {
     border-bottom: 1px solid grey;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 
-.updateParagraph {
-    
+.historyItemTitle {
+    font-weight: bold;
 }
+
+.historyLink {
+    cursor: pointer;
+}
+
+/* .historyLink:hover {
+    opacity: 0.9;
+} */

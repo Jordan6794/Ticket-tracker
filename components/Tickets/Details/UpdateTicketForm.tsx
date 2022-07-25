@@ -86,7 +86,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 
         await deleteTicket(ticket.id, historyElem)
         dispatch(ticketsActions.deleteTicket({id: ticket.id, historyElem}))
-        router.push(`/tickets/feed?orderBy=${QUERY_CREATED_AT}`)
+        router.push(`/tickets/feedopen?orderBy=${QUERY_CREATED_AT}`)
     }
 
 	return (
