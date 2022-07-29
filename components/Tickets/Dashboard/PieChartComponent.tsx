@@ -55,7 +55,7 @@ const renderActiveShape = (props: any) => {
 				{payload.name}
 			</text>
             <text x={cx} y={cy+15} dy={8} textAnchor="middle" fill={fill}>
-            {`${value}`} {`(${(percent * 100).toFixed(2)}%)`}
+            {`${value}`} {`(${(percent * 100).toFixed(1)}%)`}
 			</text>
             
 

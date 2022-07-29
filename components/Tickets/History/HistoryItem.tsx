@@ -44,7 +44,7 @@ const TicketsHistory: FunctionComponent<{ historyElement: HistoryElem }> = ({ hi
 				Ticket {historyElement.ticket_title}
 			</p>
 			<p>
-				{historyElement.change.author} {actionText} the ticket {historyElement.ticket_title} - {timeAgo}
+				{historyElement.change.author} {actionText} the ticket <q>{historyElement.ticket_title}</q> - {timeAgo}
 			</p>
 		</>
 	)

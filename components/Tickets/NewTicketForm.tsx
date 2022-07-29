@@ -83,7 +83,7 @@ const NewTicketForm: FunctionComponent = () => {
 				<form className={styles.form}>
 					<h3 className={styles.pageTitle}>New Ticket</h3>
 
-					<label htmlFor="title">Title</label>
+					<label htmlFor="title" className={styles.label}>Title</label>
 					<input
 						className={styles.input}
 						type="text"
@@ -103,7 +103,7 @@ const NewTicketForm: FunctionComponent = () => {
 					</select>
 
 					<label className={styles.label} htmlFor="project">Project</label>
-					<select  className={styles.select} name="project" id="project" onChange={(event) => onInputChange(event, 'project')} value={formInputs.priority}>
+					<select  className={styles.select} name="project" id="project" onChange={(event) => onInputChange(event, 'project')} value={formInputs.project}>
 						{Object.values(Project).map((project, i) => (
 							<option key={i} value={project}>
 								{project}
@@ -118,9 +118,9 @@ const NewTicketForm: FunctionComponent = () => {
 								{type}
 							</option>
 						))}
-					</select>
+					</select> 
 
-					<label htmlFor="post">Post</label>
+					<label htmlFor="post" className={styles.label}>Message</label>
 					<textarea className={styles.textArea} name="post" id="post" onChange={(event) => onInputChange(event, 'post')} value={formInputs.post} />
 
 					<div>

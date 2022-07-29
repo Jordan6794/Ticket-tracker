@@ -60,7 +60,8 @@ const TicketsDashboard: FunctionComponent = () => {
 		{ name: 'Other', value: otherTicketsCount },
 	]
 
-	const pieColors = ['#16B1FF', '#56CA00', '#FF4C51', '#20C98B'] // first gray : 9B9EA3
+	// const pieColors = ['#16B1FF', '#56CA00', '#FF4C51', '#20C98B'] // first gray : 9B9EA3
+	const pieColors = ['#20C98B', '#9B9EA3', '#2CABE3', '#FFC36D']
 
 	return (
 		<div className="content-div">

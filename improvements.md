@@ -1,15 +1,14 @@
 - Feedback History display
 - Small design feedbacks : Dashboard Ticket by title ? general stats title ? History card title ?
+- Other design feedbacks : New ticket page (and double title remove ?)
 - Do home/login page
 - Change colors of dashboard
-
 
 Design:
 - Finish sideNav : improve top of leftNav, just remove margin top? newTicket in nav ? + make responsivity (expand on hover on smaller and hanburger on mobile)
 - Put pie name/title in bold ?
 - Redo ticket feed design : smaller height et less space in between (need like 10ish tickets par page izi) + put project/type in display
 + make un btn see more/edit in the design too, can not only be hover on title text
-- Redesign new ticket (can check design for update ticket)
 
 Later :
 - Team/assign people to tickets
