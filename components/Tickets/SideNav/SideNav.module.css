@@ -1,7 +1,7 @@
 .navDiv {
     width: var(--sideNav-width);
     background-color: #20222A;
-    padding: 3em 0em;
+    padding-top: 1em;
     position: fixed;
     top: 7vh;
     height: 93vh;

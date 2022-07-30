@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { FunctionComponent } from 'react'
 
 import { getTimeAgo } from '../../../utils/date.util'
-import { Status, Ticket } from '../tickets.model'
+import { Priority, Status, Ticket } from '../tickets.model'
 
 import styles from './TicketPreview.module.css'
 
@@ -10,31 +10,46 @@ const TicketPreview: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => {
 	const formatedCreatedDate = getTimeAgo(new Date(ticket.created_at * 1000), false)
 	const formatedUpdatedDate = getTimeAgo(new Date(ticket.last_updated_date * 1000), false)
 
-	let statusStyle = ''
+	let ticketDivStatusStyle = ''
 	let iconStatusStyle = ''
+	let iconPriorityStyle = ''
 	switch (ticket.status) {
 		case Status.Open:
-			statusStyle = styles.openStatus
+			ticketDivStatusStyle = styles.openStatus
 			iconStatusStyle = styles.iconOpenStatus
 			break
 		case Status.Pending:
-			statusStyle = styles.pendingStatus
+			ticketDivStatusStyle = styles.pendingStatus
 			iconStatusStyle = styles.iconPendingStatus
 			break
 		case Status.Closed:
-			statusStyle = styles.closedStatus
+			ticketDivStatusStyle = styles.closedStatus
 			iconStatusStyle = styles.iconClosedStatus
 			break
 		case Status.Resolved:
-			statusStyle = styles.resolvedStatus
+			ticketDivStatusStyle = styles.resolvedStatus
 			iconStatusStyle = styles.iconResolvedStatus
 			break
 	}
 
+	switch (ticket.priority) {
+		case Priority.Low:
+			iconPriorityStyle = styles.priorityLow
+			break
+		case Priority.Medium:
+			iconPriorityStyle = styles.priorityMedium
+			break
+		case Priority.High:
+			iconPriorityStyle = styles.priorityHigh
+			break
+		case Priority.Urgent:
+			iconPriorityStyle = styles.priorityUrgent
+			break
+	}
+
 	return (
-		<div className={`${styles.ticketDiv} ${statusStyle}`}>
+		<div className={`${styles.ticketDiv} ${ticketDivStatusStyle}`}>
 			<div className={styles.leftArea}>
-				{/* <Profile /> */}
 				<Link href={`/tickets/${ticket.id}`}>
 					<a className={styles.ticketTitle}>{ticket.title}</a>
 				</Link>
@@ -46,15 +61,22 @@ const TicketPreview: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => {
 				</p>
 			</div>
 			<div className={styles.rightArea}>
-				<p className={styles.statusParagraph}>
-					Status <i className={`${iconStatusStyle} fa-solid fa-bars-staggered`}></i> <span className={styles.statusText}>{ticket.status}</span>
-				</p>
-				<p className={styles.priorityParagraph}>
-					Priority <i className={`fa-solid fa-hourglass-empty`}></i> <span className={styles.priorityText}>{ticket.priority}</span>
-				</p>
-				<p className={styles.answersParagraph}>
-					{ticket.answers.length} {ticket.answers.length === 1 ? 'Answer' : 'Answers'}
-				</p>
+				<div className={styles.infosDiv}>
+					<p className={styles.statusParagraph}>
+						Status <i className={`${iconStatusStyle} fa-solid fa-bars-staggered`}></i> <span className={styles.statusText}>{ticket.status}</span>
+					</p>
+					<p className={styles.priorityParagraph}>
+						Priority <i className={`${iconPriorityStyle} fa-solid fa-hourglass-empty`}></i> <span className={styles.priorityText}>{ticket.priority}</span>
+					</p>
+					{/* <p className={styles.answersParagraph}>
+						{ticket.answers.length} {ticket.answers.length === 1 ? 'Answer' : 'Answers'}
+					</p> */}
+				</div>
+				<div>
+					<Link href={`/tickets/${ticket.id}`}>
+						<button className={`btn btn-primary btn-delete btn-details`}>Details</button>
+					</Link> 
+				</div>
 			</div>
 		</div>
 	)

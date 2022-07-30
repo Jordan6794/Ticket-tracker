@@ -54,7 +54,9 @@ const TicketsFeed: FunctionComponent<{isOpenTicketsFeed: boolean}> = ({isOpenTic
                         </div>
                     </div>
 			<div className='container'>
-				{ticketsDisplay}
+				<div className={styles.previewsDiv}>
+					{ticketsDisplay}
+				</div>
 			</div>
 		</div>
 	)

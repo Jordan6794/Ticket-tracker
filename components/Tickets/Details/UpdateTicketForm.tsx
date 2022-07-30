@@ -39,7 +39,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 		await handleUpdateTicket(newTicket)
 	}
 
-	async function handleSolveTicket(event: React.FormEvent) {
+	async function handleResolveTicket(event: React.FormEvent) {
 		event.preventDefault()
 		setFormInputs(prevInputs => ({...prevInputs, status: Status.Resolved}))
 		const changes: TicketChanges = { status: Status.Resolved, last_updated_date: Timestamp.now().seconds }
@@ -133,7 +133,7 @@ const UpdateTicketForm: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => 
 				</button>
 			</form>
 			{ticket.status !== Status.Resolved && (
-				<button className={`btn btn-primary ${styles.btn} ${styles.resolveBtn}`} type="submit" onClick={handleSolveTicket}>
+				<button className={`btn btn-primary ${styles.btn} ${styles.resolveBtn}`} type="submit" onClick={handleResolveTicket}>
 					Resolve
 				</button>
 			)}

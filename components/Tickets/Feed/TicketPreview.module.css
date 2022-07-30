@@ -1,7 +1,7 @@
 .ticketDiv{
     background-color: #ffff;
     padding: 1em 2em;
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,22 +10,23 @@
     border: 1px solid lightgray;
 }
 
+.ticketDiv:last-of-type {
+    margin-bottom: 0;
+}
+
 .leftArea {
-    width: 70%;
+    width: 65%;
 }
 
 .openStatus{
     border-left: 2px solid rgba(0,0,255, 0.7);
 }
-
 .closedStatus{
     border-left: 2px solid rgba(255,0,0,0.7);
 } 
-
 .pendingStatus{
     border-left: 2px solid gray;
 }
-
 .resolvedStatus{
     border-left: 2px solid rgba(0,128,0,0.7);
 }
@@ -33,17 +34,27 @@
 .iconClosedStatus{
     color: rgba(255,0,0,0.7)
 } 
-
 .iconPendingStatus{
     color: gray;
 }
-
 .iconResolvedStatus{
     color: rgba(0,128,0,0.7)
 }
-
 .iconOpenStatus{
     color: rgba(0,0,255, 0.7)
+}
+
+.priorityLow {
+    color: #20C98B;
+}
+.priorityMedium {
+    color: rgb(112, 112, 250);
+}
+.priorityHigh {
+    color: #f8b04a;
+}
+.priorityUrgent {
+    color: rgb(248, 43, 43);
 }
 
 .ticketTitle {
@@ -66,25 +77,19 @@
 }
 
 .createdText{
-    margin-top: 1em;
+    margin-top: 0.65em;
 }
 
 .rightArea{
-    margin-right: 3em;
     text-align: right;
+    display: flex;
+    align-items: center;
 }
 
-.statusParagraph,
-.priorityParagraph{
-    margin-bottom: 1em;
+.infosDiv {
+    margin-right: 1.5em;
 }
 
-.statusParagraph,
-.priorityParagraph{
-    font-size: 0.9em;
-}
-
-.priorityText,
-.statusText {
-    font-size: 1.2em;
+.statusParagraph{
+    margin-bottom: 0.5em;
 }

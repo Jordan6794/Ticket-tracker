@@ -9,7 +9,7 @@ export const QUERY_STATUS = 'status'
 //? different way of doing que having both individual consts and manually making the array ?
 export const QUERIES = [QUERY_CREATED_AT, QUERY_LAST_UPDATED, QUERY_PRIORITY, QUERY_STATUS]
 
-//? can not have default value here similar to my sortDisplay funct right ?
-const QUERIES_DISPLAY: Record<string, string> = {
-    QUERY_CREATED_AT: 'Date created'
-}
+// //? can not have default value with record similar to my sortDisplay funct  ?
+// const QUERIES_DISPLAY: Record<string, string> = {
+//     QUERY_CREATED_AT: 'Date created'
+// }

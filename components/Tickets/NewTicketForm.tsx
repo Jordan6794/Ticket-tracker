@@ -35,8 +35,16 @@ const NewTicketForm: FunctionComponent = () => {
 		router.push(`/tickets/feedopen?orderBy=${QUERY_CREATED_AT}`)
 	}
 
+	function isFormValid(){
+		return (formInputs.title !== '' && formInputs.post !== '')
+	}
+
 	function onSubmitForm(event: React.FormEvent) {
 		event.preventDefault()
+
+		if(!isFormValid()){
+			return 
+		}
 
 		const currentDate = Timestamp.now().seconds
 		const newTicket: Ticket = {
@@ -85,6 +93,7 @@ const NewTicketForm: FunctionComponent = () => {
 
 					<label htmlFor="title" className={styles.label}>Title</label>
 					<input
+						required={true}
 						className={styles.input}
 						type="text"
 						name="title"

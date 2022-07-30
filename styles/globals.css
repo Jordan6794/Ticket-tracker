@@ -77,6 +77,14 @@ Buttons */
   margin-right: 1em;
 }
 
+.btn-details {
+  padding: 0.45em 1em;
+  background-color: rgb(245,245,245);
+  border: 1px solid lightgray;
+  border-radius: 14px;
+  color: black;
+}
+
 
 /* ========
 Common Divs */
