@@ -2,12 +2,11 @@
 : Dashboard "Ticket by" title ? general stats title ? Put pie Name/title in bold ? same color?
 : New ticket page (and double title remove ?)
 : SideNav (see what to do with top)
+: Ticketfeed updated
 - Do home/login page
 
 Design:
 - Finish sideNav : improve top of leftNav, just remove margin top? newTicket in nav ? + make responsivity (expand on hover on smaller and hanburger on mobile)
-- Redo ticket feed design : smaller height et less space in between (need like 10ish tickets par page izi) + put project/type in display
-+ make un btn see more/edit in the design too, can not only be hover on title text
 
 Later :
 - Make filler tickets 

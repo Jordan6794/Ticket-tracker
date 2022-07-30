@@ -15,7 +15,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<Provider store={store}>
 			<FetchWrapper>
 				<AuthWrapper>
-					<Nav />
 					<Component {...pageProps} />
 					<Script src='https://kit.fontawesome.com/5ddea7c676.js' crossOrigin='anonymous'></Script>
 				</AuthWrapper>
