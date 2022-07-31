@@ -1,6 +1,7 @@
 :root{
   --text-color: #dadce1;
   --sideNav-width: 250px;
+  --sideNav-width-small: 65px
 }
 
 html,
@@ -109,4 +110,11 @@ Common Divs */
     margin-top: 2.5em;
     margin-bottom: 2.5em;
     border-radius: 10px;
+}
+
+
+@media (max-width: 1150px) {
+  .content-div {
+      padding-left: var(--sideNav-width-small);
+  }
 }

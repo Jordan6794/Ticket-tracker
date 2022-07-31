@@ -3,18 +3,19 @@
 : New ticket page (and double title remove ?)
 : SideNav (see what to do with top)
 : Ticketfeed updated
-- protected routes
+- Make everyting responsive
 
 Design:
 - Finish sideNav : improve top of leftNav, just remove margin top? newTicket in nav ? + make responsivity (expand on hover on smaller and hanburger on mobile)
 
 Later :
-- Make filler tickets 
+- Make filler tickets content
 -  Pagination on History
 - Pagination for ticket feed ?
 - Team Ticket Logo ? At least better design/fonts if just text
 - Add local history for each ticket ?
 - Refactor a bit
+- Form validation (auth ? new ticket done now)
 - Add filter (today, 1 week, 1 month) in history ?
 - Button back to feed in ticket details ? (need to see which feed we come from)
 - Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken

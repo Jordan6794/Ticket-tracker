@@ -38,12 +38,10 @@ const AuthForm: FunctionComponent = () => {
 				//todo gerer errors (same for signup)
 			} else {
 				resetForm()
-				router.push('/tickets/feedopen?orderBy=created_at')
 			}
 		} else {
 			signUpUserWithUsername(email, password, username)
 			resetForm()
-			router.push('/tickets/feedopen?orderBy=created_at')
 		}
 	}
 

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { useAppSelector } from '../../hooks'
 import { logout } from '../../lib/firebase.service'
@@ -10,17 +9,16 @@ import styles from './Nav.module.css'
 
 export default function Nav() {
 	const user = useAppSelector((state) => state.auth)
-	const router = useRouter()
 
 	async function handleLogout() {
 		await logout()
-		router.push('/')
 	}
 
 	return (
 		<div className={styles.nav}>
 			<div className={styles.logoDiv}>
-				<h3>Team Ticket</h3>
+				<h3 className={styles.expendedTitle}>Team Ticket</h3>
+				<h3 className={styles.contractedTitle}>TT</h3>
 			</div>
 			<ul className={styles.linkList}>
 				{!user.id && (

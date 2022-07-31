@@ -1,5 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { FunctionComponent, useEffect } from "react";
+import { useRouter } from "next/router";
 
 import { useAppDispatch } from "../../hooks";
 import { authActions } from "../../store/auth";
@@ -8,19 +9,30 @@ import { auth } from '../../lib/firebase.service'
 
 const AuthWrapper: FunctionComponent<{ children: JSX.Element[] | JSX.Element }> = (props) =>{
     const dispatch = useAppDispatch()
+	const router = useRouter()
 
+	// need to change to only push if needed (protected as non user or login as user)
 	useEffect(() => {
+		const publicPathnames = ['/', '/auth']
+
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				// User is signed in, see docs for a list of available properties
-				// https://firebase.google.com/docs/reference/js/firebase.User
 				const userInfos = { username: user.displayName, id: user.uid }
 				dispatch(authActions.login(userInfos))
+
+				//redirecting if needed
+				if(publicPathnames.includes(router.pathname)){
+					router.replace('/tickets/feedopen?orderBy=created_at')
+				}
 			} else {
 				dispatch(authActions.logout())
+				
+				if(!publicPathnames.includes(router.pathname)){
+					router.replace('/')
+				}
 			}
 		})
-	}, [dispatch])
+	}, [dispatch, router])
     return <>{props.children}</>
 }
 

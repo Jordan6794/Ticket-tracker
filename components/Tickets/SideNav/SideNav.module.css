@@ -6,6 +6,7 @@
     top: 7vh;
     height: 93vh;
     z-index: 10;
+    transition: width 0.32s ease;
 }
 
 .navItem {
@@ -13,11 +14,13 @@
     font-size: 1.1em;
     color: white;
     text-align: center;
+    overflow: hidden;
 }
 
 .navElement {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .devider {
@@ -44,6 +47,8 @@
 .navText {
     opacity: 0.8;
     letter-spacing: 0.3px;
+    position: absolute;
+    left: 35px;
 }
 
 .active {
@@ -55,3 +60,21 @@
 .active:hover{
     background-color: #FF5050;
   }
+
+@media (max-width: 1150px) {
+    .navDiv {
+        width: var(--sideNav-width-small);
+    }
+    
+    .navText {
+        display: none;
+    }
+    .navDiv:hover {
+        width: var(--sideNav-width)
+    }
+
+    .navDiv:hover > ul > li > div > .navText {
+        display: initial;
+    }
+
+}

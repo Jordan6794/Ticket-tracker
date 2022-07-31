@@ -20,6 +20,10 @@
     align-items: center;
 }
 
+.contractedTitle {
+    display: none;
+}
+
 .linkList {
     display: flex;
     justify-content: flex-end;
@@ -37,4 +41,16 @@
 
 .logoutIcon {
     margin-left: 0.25em;
+}
+
+@media (max-width: 1150px) {
+    .logoDiv {
+        width: var(--sideNav-width-small);
+    }
+    .expendedTitle {
+        display: none;
+    }
+    .contractedTitle {
+        display: initial;
+    }
 }
