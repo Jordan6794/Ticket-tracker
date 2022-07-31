@@ -3,7 +3,7 @@
 : New ticket page (and double title remove ?)
 : SideNav (see what to do with top)
 : Ticketfeed updated
-- Do home/login page
+- protected routes
 
 Design:
 - Finish sideNav : improve top of leftNav, just remove margin top? newTicket in nav ? + make responsivity (expand on hover on smaller and hanburger on mobile)

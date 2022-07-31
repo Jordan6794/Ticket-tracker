@@ -3,6 +3,8 @@ import { FunctionComponent, useState } from 'react'
 
 import { signInUser, signUpUserWithUsername } from '../../lib/firebase.service'
 
+import styles from './Auth.module.css'
+
 const AuthForm: FunctionComponent = () => {
 	const [isLogin, setIsLogin] = useState(true)
 	const [formInputs, setFormInputs] = useState({
@@ -36,11 +38,12 @@ const AuthForm: FunctionComponent = () => {
 				//todo gerer errors (same for signup)
 			} else {
 				resetForm()
-				router.push('/tickets/feed?orderBy=created_at')
+				router.push('/tickets/feedopen?orderBy=created_at')
 			}
 		} else {
 			signUpUserWithUsername(email, password, username)
 			resetForm()
+			router.push('/tickets/feedopen?orderBy=created_at')
 		}
 	}
 
@@ -60,59 +63,88 @@ const AuthForm: FunctionComponent = () => {
 
 	return (
 		<>
-			<h3>{isLogin ? 'Login' : 'Signup'}</h3>
-			<form>
-				{!isLogin && (
-					<>
-						<label htmlFor="username">Username</label>
+			<h3 className={styles.title}>Team Ticket</h3>
+			<form className={styles.form}>
+				<div className={styles.inputsDiv}>
+					{!isLogin && (
+						<div className={styles.textField}>
+							<input
+								type="text"
+								name="username"
+								id="username"
+								required
+								placeholder="Username"
+								onChange={(event) => onInputChange(event, 'username')}
+								value={formInputs.username}
+							/>
+							<span></span>
+							{/* <label htmlFor="username">Username</label> */}
+						</div>
+					)}
+
+					<div className={styles.textField}>
+						{/* <label htmlFor="email">Email</label> */}
 						<input
-							name="username"
-							id="username"
-							onChange={(event) => onInputChange(event, 'username')}
-							value={formInputs.username}
-						/>
-					</>
-				)}
+							type="email"
+							name="email"
+							required
+							placeholder="Email"
+							id="email"
+							onChange={(event) => onInputChange(event, 'email')}
+							value={formInputs.email}
+							/>
+						<span></span>
+					</div>
 
-				<label htmlFor="email">Email</label>
-				<input
-					type="email"
-					name="email"
-					id="email"
-					onChange={(event) => onInputChange(event, 'email')}
-					value={formInputs.email}
-				/>
-
-				<label htmlFor="password">Password</label>
-				<input
-					name="password"
-					id="password"
-					type="password"
-					onChange={(event) => onInputChange(event, 'password')}
-					value={formInputs.password}
-				/>
-
-				{!isLogin && (
-					<>
-						<label htmlFor="repeat-password">Repeat Password</label>
+					<div className={styles.textField}>
+						{/* <label htmlFor="password">Password</label> */}
 						<input
-							name="repeat-password"
-							id="repeat-password"
+							name="password"
+							id="password"
 							type="password"
-							onChange={(event) =>
-								onInputChange(event, 'repeatPassword')
-							}
-							value={formInputs.repeatPassword}
+							placeholder="Password"
+							required
+							onChange={(event) => onInputChange(event, 'password')}
+							value={formInputs.password}
 						/>
-					</>
-				)}
+						<span></span>
+					</div>
 
-				<button type="submit" onClick={onSubmitForm}>
-					Submit
+					{!isLogin && (
+						<div className={styles.textField}>
+							{/* <label htmlFor="repeat-password">Repeat Password</label> */}
+							<input
+								name="repeat-password"
+								id="repeat-password"
+								type="password"
+								required
+								placeholder="Repeat password"
+								onChange={(event) =>
+									onInputChange(event, 'repeatPassword')
+								}
+								value={formInputs.repeatPassword}
+							/>
+							<span></span>
+						</div>
+					)}
+				</div>
+
+				<button className={`btn ${styles.btn}`} type="submit" onClick={onSubmitForm}>
+					{isLogin ? 'Login' : 'Signup'}
 				</button>
-				<button type="button" onClick={onSwitchAuthtype}>
-					Switch to {isLogin ? 'Signup' : 'Login'}
-				</button>
+				<div className={styles.switchText}>
+
+						{isLogin
+							? 'Already have an account ?'
+							: "Don't have an account yet ?"}
+						<button
+							type="button"
+							className={styles.link}
+							onClick={onSwitchAuthtype}
+						>
+							{isLogin ? 'Signup' : 'Login'}
+						</button>
+				</div>
 			</form>
 		</>
 	)

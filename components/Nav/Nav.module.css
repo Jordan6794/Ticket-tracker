@@ -28,3 +28,13 @@
 .linkList > * {
     margin-right: 1em;
 }
+
+.logout {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+}
+
+.logoutIcon {
+    margin-left: 0.25em;
+}

@@ -1,15 +1,20 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { useAppSelector } from '../../hooks'
 import { logout } from '../../lib/firebase.service'
+
+import LogoutIcon from '../../public/logout.svg'
 
 import styles from './Nav.module.css'
 
 export default function Nav() {
 	const user = useAppSelector((state) => state.auth)
+	const router = useRouter()
 
-	function handleLogout() {
-		logout()
+	async function handleLogout() {
+		await logout()
+		router.push('/')
 	}
 
 	return (
@@ -23,8 +28,8 @@ export default function Nav() {
 						<Link href="/auth">Login</Link>
 					</li>
 				)}
-				{user.id && <li onClick={handleLogout}>Logout</li>}
 				{user.id && <li>{user.username}</li>}
+				{user.id && <li className={styles.logout} onClick={handleLogout}>Logout <LogoutIcon className={styles.logoutIcon} /></li>}
 			</ul>
 		</div>
 	)
