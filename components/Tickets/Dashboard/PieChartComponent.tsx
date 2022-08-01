@@ -47,7 +47,7 @@ const renderActiveShape = (props: any) => {
 	const ey = my
 	const textAnchor = cos >= 0 ? 'start' : 'end'
 
-    const responsiveFontSize = payload.name.length > 13 ? '13px' : '16px'
+    const responsiveFontSize = payload.name.length > 13 ? '13px' : '18px'
 
 	return (
 		<g>

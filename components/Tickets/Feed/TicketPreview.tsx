@@ -68,9 +68,6 @@ const TicketPreview: FunctionComponent<{ ticket: Ticket }> = ({ ticket }) => {
 					<p className={styles.priorityParagraph}>
 						Priority <i className={`${iconPriorityStyle} fa-solid fa-hourglass-empty`}></i> <span className={styles.priorityText}>{ticket.priority}</span>
 					</p>
-					{/* <p className={styles.answersParagraph}>
-						{ticket.answers.length} {ticket.answers.length === 1 ? 'Answer' : 'Answers'}
-					</p> */}
 				</div>
 				<div>
 					<Link href={`/tickets/${ticket.id}`}>

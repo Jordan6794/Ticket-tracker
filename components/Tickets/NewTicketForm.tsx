@@ -89,7 +89,6 @@ const NewTicketForm: FunctionComponent = () => {
             </div>
 			<div className="container white-container">
 				<form className={styles.form}>
-					<h3 className={styles.pageTitle}>New Ticket</h3>
 
 					<label htmlFor="title" className={styles.label}>Title</label>
 					<input

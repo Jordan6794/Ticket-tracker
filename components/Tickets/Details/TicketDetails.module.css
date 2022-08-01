@@ -34,7 +34,7 @@
 }
 
 .rightArea{
-    width: 22%;
+    width: 25%;
     padding: 1em;
     padding-top: 3em;
     border-left: 1px solid lightgray;
@@ -51,4 +51,18 @@ Answers */
     padding: 1em;
     border-radius: 5px;
     box-shadow: 3px 3px 6px rgb(0 0 0 / 3%);
+}
+
+
+/* ====
+Media Queries */
+@media (max-width: 750px) {
+    .ticketDiv{
+        flex-direction: column;
+    }
+
+    .rightArea{
+        width: 100%;
+        border-top: 1px solid lightgray;
+    }
 }

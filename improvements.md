@@ -1,37 +1,33 @@
-- Feedbacks : History display, History card title ?
-: Dashboard "Ticket by" title ? general stats title ? Put pie Name/title in bold ? same color?
-: New ticket page (and double title remove ?)
-: SideNav (see what to do with top)
-: Ticketfeed updated
+- Feedback : SideNav (see what to do with top)
 - Make everyting responsive
-
-Design:
-- Finish sideNav : improve top of leftNav, just remove margin top? newTicket in nav ? + make responsivity (expand on hover on smaller and hanburger on mobile)
 
 Later :
 - Make filler tickets content
+- Upgrade design of new ticket et history
 -  Pagination on History
 - Pagination for ticket feed ?
 - Team Ticket Logo ? At least better design/fonts if just text
 - Add local history for each ticket ?
 - Refactor a bit
 - Form validation (auth ? new ticket done now)
+- Refeedback doublebar for title, maybe juste virer ? voir feedback sans screenshare
 - Add filter (today, 1 week, 1 month) in history ?
 - Button back to feed in ticket details ? (need to see which feed we come from)
-- Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken
 - check le server side render thingy
-- put auth redirectguard
 - Put a search on the topBar ?
+- Switch to Tailwind
+- Switch to hamburger only rather than hover expend (+ hamburger pour user) quand mobile size
 - Clean/split updates and other changes so I can clean my optional changes? in the type interface
 - Make small modal on success update of ticket
 - Check confirmations que firebase request succesfull avant de dispatch le local state
 - Form validation error display in newTicket form
-
+- Put regex on sidenav Active ticket so that tickets/feed and tickets/id get taken ?
 - Put something if ticket not found in ticket details / Faire un component pour ticketNotfound in ticket details
+
 - Manage + display errors for auth singin/signup
 - Make sorting priority/status custom order rather than just sorted alphabetically
 - Add ascending / descending options for query
-- Add profile picture (with default one ?) to users ?
+- Add profile picture (with default one ?) to users ? Can put it in ticket preview then
 - Team/assign people to tickets
 
 

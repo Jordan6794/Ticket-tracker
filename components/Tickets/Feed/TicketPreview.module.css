@@ -90,6 +90,44 @@
     margin-right: 1.5em;
 }
 
-.statusParagraph{
+.statusParagraph {
     margin-bottom: 0.5em;
+}
+
+/* .statusParagraph,
+.priorityParagraph{
+    font-size: 0.85em;
+}
+
+.priorityText,
+.statusText {
+    font-size: 1.25em;
+}  */
+
+.priorityText,
+.statusText{
+    font-weight: 500;
+}
+
+@media (max-width: 890px) {
+    .ticketDiv {
+        padding: 1em;
+    }
+    .ticketTitle {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 630px) {
+    .ticketDiv {
+        padding: 1em 0.5em;
+    }
+
+    .createdText {
+        font-size: 0.8rem;
+    }
+
+    .infosDiv {
+        margin-right: 0.5em;
+    }
 }

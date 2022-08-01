@@ -41,7 +41,7 @@ const TicketsHistory: FunctionComponent<{ historyElement: HistoryElem }> = ({ hi
 	const historyLineDisplay = (
 		<>
 			<p className={styles.historyItemTitle}>
-				Ticket {historyElement.ticket_title}
+				Ticket <q>{historyElement.ticket_title}</q>
 			</p>
 			<p>
 				{historyElement.change.author} {actionText} the ticket <q>{historyElement.ticket_title}</q> - {timeAgo}

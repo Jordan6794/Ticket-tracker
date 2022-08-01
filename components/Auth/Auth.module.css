@@ -117,3 +117,13 @@
 .link:focus {
 	text-decoration: underline;
 }
+
+
+/* ====
+MEDIA QUERIES==== */
+@media (max-width: 490px) {
+    .card {
+        width: 330px;
+        padding: 0.8em;
+    }
+}
