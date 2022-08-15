@@ -56,7 +56,7 @@ const TicketsDashboard: FunctionComponent = () => {
 	const pieData4 = [
 		{ name: 'Personal Portfolio', value: portfolioTicketsCount },
 		{ name: 'Team Ticket', value: ticketTicketsCount },
-		{ name: 'Habit Streak', value: habitTicketsCount },
+		{ name: 'Habits30', value: habitTicketsCount },
 		{ name: 'Other', value: otherTicketsCount },
 	]
 

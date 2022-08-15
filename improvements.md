@@ -1,6 +1,5 @@
 - Feedback : SideNav (see what to do with top)
 - Make filler tickets content (with plusieurs acc, create accs with Firstname Martin John David)
-- Update habits30 name
 - Check fix logout not aligned
 
 Later :
