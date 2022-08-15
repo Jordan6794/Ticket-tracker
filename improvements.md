@@ -1,13 +1,16 @@
 - Feedback : SideNav (see what to do with top)
-- Make everyting responsive
+- Make filler tickets content (with plusieurs acc, create accs with Firstname Martin John David)
+- Update habits30 name
+- Check fix logout not aligned
 
 Later :
-- Make filler tickets content
+- Team Ticket Logo ? At least better design/fonts if just text
 - Upgrade design of new ticket et history
 -  Pagination on History
 - Pagination for ticket feed ?
-- Team Ticket Logo ? At least better design/fonts if just text
 - Add local history for each ticket ?
+- put loading skeleton for ticket feed (et autres too)
+- Recheck Chris Nyce bug tracker sick landing page
 - Refactor a bit
 - Form validation (auth ? new ticket done now)
 - Refeedback doublebar for title, maybe juste virer ? voir feedback sans screenshare
