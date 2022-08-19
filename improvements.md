@@ -1,10 +1,9 @@
 - Feedback : SideNav (see what to do with top)
-- Make filler tickets content (with plusieurs acc, create accs with Firstname Martin John David)
-- Check fix logout not aligned
+- Team Ticket Logo ? At least better design/fonts if just text ?
+- Clean Ticket content
 
 Later :
-- Team Ticket Logo ? At least better design/fonts if just text
-- Upgrade design of new ticket et history
+- Upgrade design of new ticket and history
 -  Pagination on History
 - Pagination for ticket feed ?
 - Add local history for each ticket ?
