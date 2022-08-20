@@ -9,7 +9,6 @@ const Home: NextPage = () => {
 			<Head>
 				<title>Team Ticket</title>
 				<meta name="description" content="Team ticket managing webapp" />
-				<link rel="icon" href="/favicon.png" />
 			</Head>
 
 			<Landing />

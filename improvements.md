@@ -1,4 +1,5 @@
 - Feedback : SideNav (see what to do with top)
+- Fix favicon not global
 - Team Ticket Logo ? At least better design/fonts if just text ?
 - Clean Ticket content
 
