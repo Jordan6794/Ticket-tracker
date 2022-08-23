@@ -1,15 +1,15 @@
 - Feedback : SideNav (see what to do with top)
-- Fix favicon not global
 - Team Ticket Logo ? At least better design/fonts if just text ?
 - Clean Ticket content
+- put loading skeleton for ticket feed (et autres too)
 
 Later :
 - Upgrade design of new ticket and history
 -  Pagination on History
 - Pagination for ticket feed ?
 - Add local history for each ticket ?
-- put loading skeleton for ticket feed (et autres too)
 - Recheck Chris Nyce bug tracker sick landing page
+- Make a new background for landing/auth (other image, or blob ? let's try blob to practice it)
 - Refactor a bit
 - Form validation (auth ? new ticket done now)
 - Refeedback doublebar for title, maybe juste virer ? voir feedback sans screenshare

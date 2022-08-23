@@ -5,10 +5,10 @@
     align-items: center;
     justify-content: center;
     background-color: #F2F2F2;
-    background-image: url(/landing-bg.jpg);
+    /* background-image: url(/landing-bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
 }
 
 .card {
