@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Team Ticket
 
-## Getting Started
+## Description
 
-First, run the development server:
+A full stack web application, build with the Next.js and Firebase for backend.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Live
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit the web application live [here](https://teamticket.vercel.app)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Features
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The app is made to help manage tickets and bugs within a team. <br>
+Features available includes :
+- Creating and managing tickets
+- Answers board for each ticket
+- Dashboard page with statistics
+- History page
+- Demo Account
+- And more
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Technologies
 
-## Learn More
+- React
+- Next.js
+- Typescript
+- Redux
+- Firebase
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## What it looks like
+### Tickets Feed
+![Tickets Feed](https://raw.githubusercontent.com/Jordan6794/Portfolio/main/public/screenshots/screen_TT_feed.png)
+### Ticket Page
+![Ticket Page](https://raw.githubusercontent.com/Jordan6794/Portfolio/main/public/screenshots/screen_TT_ticket.png)
+### Dashboard
+![Dashboard](https://raw.githubusercontent.com/Jordan6794/Portfolio/main/public/screenshots/screen_TT_dashboard.png)
+### Landing Page
+![Landing Page](https://raw.githubusercontent.com/Jordan6794/Portfolio/main/public/screenshots/screen_TT_landing.png)
+### History Page
+![History Page](https://raw.githubusercontent.com/Jordan6794/Portfolio/main/public/screenshots/screen_TT_history.png)
